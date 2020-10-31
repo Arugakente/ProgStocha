@@ -10,6 +10,12 @@ range Vertex = 1..nbVertex;
 
 int c[Vertex, Vertex] = ...;
 
+tuple Subtour{
+	int size;
+	{int} subtour;
+}
+{Subtour} subtours = ...;
+
 
 dvar boolean x[Vertex,Vertex];
 
@@ -22,13 +28,14 @@ subject to{
 		x[v,v] == 0;	 //ignores loops
 	}
 	
-	forall(v1,v2 in Vertex){	
-		x[v1, v2] == 0 || x[v1, v2] == 1;   // x(i,j) c {0,1}
+	forall(i,j in Vertex){	
+		x[i, j] == 0 || x[i, j] == 1;   // x(i,j) c {0,1}
 	}
 
 	forall(i in Vertex) { sum(j in Vertex) x[i,j] == 1;} //only one input and output path per vertex
 	forall(j in Vertex) { sum(i in Vertex) x[i,j] == 1;}
 	
-	//forall(S in )    //subtour
-
+	forall(S in subtours){    //subtour
+		sum(i,j in S.subtour) x[i,j] <= S.size - 1;
+	}	
 }
