@@ -95,7 +95,7 @@ public:
                 distMat.push_back(std::vector<float>());
                 for(auto const& [key2, val2] : graphListing)
                 {
-                    distMat[currentIndex].pushBack(val1.)
+                    distMat.back().push_back(val1.calculateDistance(val2));
                 }
             }
         }
