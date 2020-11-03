@@ -41,7 +41,7 @@ for i in range(dim):
 
 ofile = open("../data/export.dat", "w")
 print("nbVertex = " + str(dim) + ";", file=ofile, end=os.linesep)
-print("c = [", file=ofile, end=os.linesep)
+print("c = [", file=ofile)
 
 for i in range(dim):
         ofile.write("\t[")
@@ -53,9 +53,9 @@ for i in range(dim):
                         ofile.write(", ")
 
         if(i<dim-1):
-                print("],", file=ofile, end=os.linesep)
+                print("],", file=ofile)
         else:
-                print("]", file=ofile, end=os.linesep)
+                print("]", file=ofile)
 
-print("];", file=ofile, end=os.linesep)
+print("];", file=ofile)
 ofile.close()
