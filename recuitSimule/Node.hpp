@@ -10,11 +10,11 @@ private:
     float x;
     float y;
 
-    bool allreadyTaken;
+    bool alreadyTaken;
     bool isStart;
 public:
-    Node(long nId,float xCoord,float yCoord):id(nId),x(xCoord),y(yCoord),allreadyTaken(false),isStart(false){};
-    int getId();
+    Node(long nId,float xCoord,float yCoord):id(nId),x(xCoord),y(yCoord),alreadyTaken(false),isStart(false){};
+    long getId();
     std::pair<float, float> getPos();
     bool getAlreadyTaken();
     bool getIsStart();

@@ -100,6 +100,8 @@ public:
 
     const std::map<long, Node>& getGraphListing();
     const std::vector<std::vector<float>>& getDistMat();
+
+    const Node& operator[](long nodeId);
     ~Graph(){};
 };
 

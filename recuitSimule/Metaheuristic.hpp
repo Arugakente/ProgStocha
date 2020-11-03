@@ -9,6 +9,8 @@
 class Metaheuristic
 {
 private:
+    float temperature;
+    float energy;
     std::vector<const Node&> currentPath;
     std::vector<const Node&> generalBestPath;
     std::vector<const Node&> currentBestPath;
