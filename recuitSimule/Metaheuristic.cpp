@@ -5,17 +5,17 @@
 #include<iostream>
 using namespace std;
 
-const vector<const Node&>& Metaheuristic::getCurrentPath()
+const vector<long>& Metaheuristic::getCurrentPath()
 {
     return currentPath;
 }
 
-const vector<const Node&>& Metaheuristic::getGeneralBestPath()
+const vector<long>& Metaheuristic::getGeneralBestPath()
 {
     return generalBestPath;
 }
 
-const vector<const Node&>& Metaheuristic::getCurrentBestPath()
+const vector<long>& Metaheuristic::getCurrentBestPath()
 {
     return currentBestPath;
 }

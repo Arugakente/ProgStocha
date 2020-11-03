@@ -19,9 +19,5 @@ public:
     bool getAlreadyTaken();
     bool getIsStart();
 
-    ~Node();
+    ~Node(){};
 };
-
-Node::~Node()
-{
-}

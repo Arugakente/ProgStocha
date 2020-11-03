@@ -11,19 +11,15 @@ class Metaheuristic
 private:
     float temperature;
     float energy;
-    std::vector<const Node&> currentPath;
-    std::vector<const Node&> generalBestPath;
-    std::vector<const Node&> currentBestPath;
+    std::vector<long> currentPath;
+    std::vector<long> generalBestPath;
+    std::vector<long> currentBestPath;
 public:
     Metaheuristic();
-    const std::vector<const Node&>& getCurrentPath();
-    const std::vector<const Node&>& getGeneralBestPath();
-    const std::vector<const Node&>& getCurrentBestPath();
+    const std::vector<long>& getCurrentPath();
+    const std::vector<long>& getGeneralBestPath();
+    const std::vector<long>& getCurrentBestPath();
     float getTemperature();
     float getEnergy();
-    ~Metaheuristic();
+    ~Metaheuristic(){};
 };
-
-Metaheuristic::~Metaheuristic()
-{
-}
