@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const Node& Graph::operator[](long nodeId)
+const Node& Graph::operator[](long nodeId) const
 {
     if(graphListing.find( nodeId ) != graphListing.end())
     {
@@ -26,12 +26,12 @@ float Graph::getDistanceBetweenNPoints(Node& p...)
     //TODO distMat.get(p2.id).get(p1.id)
 }
 
-const map<long, Node>& Graph::getGraphListing()
+const map<long, Node>& Graph::getGraphListing() const
 {
     return graphListing;
 }
 
-const vector<vector<float>>& Graph::getDistMat()
+const vector<vector<float>>& Graph::getDistMat() const
 {
     return distMat;
 }

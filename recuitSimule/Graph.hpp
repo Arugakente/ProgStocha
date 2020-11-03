@@ -107,10 +107,10 @@ public:
     const Node& getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(Node&p1, ...);
 
-    const std::map<long, Node>& getGraphListing();
-    const std::vector<std::vector<float>>& getDistMat();
+    const std::map<long, Node>& getGraphListing() const ;
+    const std::vector<std::vector<float>>& getDistMat() const;
 
-    const Node& operator[](long nodeId);
+    const Node& operator[](long nodeId) const;
     ~Graph(){};
 };
 
