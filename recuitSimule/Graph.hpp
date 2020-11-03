@@ -23,7 +23,7 @@ private:
     std::string weightType;
     std::string dataType;
 public:
-    Graph(std::string inputFile):graphListing(),name("none"),type("none"),comment("none"),dimention(0),weightType("none"),dataType("none")
+    Graph(std::string inputFile):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimention(0),weightType("none"),dataType("none")
     {
         std::ifstream loadingFile (inputFile);
 
@@ -89,6 +89,15 @@ public:
                 graphListing.insert(std::pair<long,Node>(id,Node(id,x,y)));
             }
             loadingFile.close();
+
+            for(auto const& [key1, val1] : graphListing)
+            {
+                distMat.push_back(std::vector<float>());
+                for(auto const& [key2, val2] : graphListing)
+                {
+                    distMat[currentIndex].pushBack(val1.)
+                }
+            }
         }
         else
         {

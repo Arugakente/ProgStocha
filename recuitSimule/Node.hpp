@@ -19,10 +19,10 @@ public:
 
     void setAlreadyTaken(bool value);
 
-    long getId();
-    std::pair<float, float> getPos();
-    bool getAlreadyTaken();
-    bool getIsStart();
+    long getId() const;
+    std::pair<float, float> getPos() const;
+    bool getAlreadyTaken() const;
+    bool getIsStart() const;
 
     ~Node(){};
 };
