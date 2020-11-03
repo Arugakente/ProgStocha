@@ -35,12 +35,12 @@ main {
 		var debut = new Date();
 		var temp = debut.getTime();
 		
-		if ( subCplex.solve() ) {	
+		if (subCplex.solve()) {	
 		
 			var fin = new Date();
 			
-			fResult.write(subCplex.getBestObjValue(), " ; ");
-			fResult.write(subCplex.getObjValue(), " ; ");
+			fResult.write(subCplex.getBestObjValue(), ";");
+			fResult.write(subCplex.getObjValue(), ";");
 			
 			optimum = subCplex.getBestObjValue();
 			
@@ -48,7 +48,7 @@ main {
 			Opl0.postProcess();	
 		}								
 		else {
-			writeln("ERROR IN STABLE COMPUTATION !!");
+			writeln("ERROR IN DETERMINISTIC COMPUTATION !!");
 		}
 		
 		subDataSource.end();
@@ -67,7 +67,7 @@ main {
 		var subDataSource = new IloOplDataSource("data/"+ s +".dat");
 		
 		var optimumData = new IloOplDataElement();
-		optimumData.makeElement("Z", optimum); //add the optimum value to the model's variables
+		optimumData.makeElement("opti", optimum); //add the optimum value to the model's variables
 		
 		subCplex.tilim = Data.timeLimit;
 		
@@ -80,18 +80,18 @@ main {
 		var debut = new Date();
 		var temp = debut.getTime();
 		
-		if ( subCplex.solve() ){	
+		if (subCplex.solve()){	
 		
 			var fin = new Date();
 			
-			fResult.write(subCplex.getBestObjValue(), " ; ");
-			fResult.write(subCplex.getObjValue(), " ; ");
+			fResult.write(subCplex.getBestObjValue(), ";");
+			fResult.write(subCplex.getObjValue(), ";");
 			
 			fResult.write(fin.getTime() - temp);
 			Opl0.postProcess();
        }
        else {
-			writeln("ERROR IN STABLE COMPUTATION !!");
+			writeln("ERROR IN STOCHASTIC COMPUTATION !!");
        }
 		
 		subDataSource.end();
@@ -102,15 +102,15 @@ main {
 	
 	
 //Processing et ecriture des resultats
-	fResult.write("dataName ; bestObjDeter ; objDeter ; processTimeDeter ; bestObjStocha ; objStocha ; processTimeStocha ;"); //en-tete du csv
+	fResult.write("dataName;bestObjDeter;objDeter;processTimeDeter;bestObjStocha;objStocha;processTimeStocha;"); //en-tete du csv
 	fResult.writeln();
 	
 	for (var s in Data.datafile)
 	{
 	init(s);
-    fResult.write(s, " ; ");
+    fResult.write(s, ";");
     computeSolDeterministe(s);
-    fResult.write(" ; ");
+    fResult.write(";");
     computeSolStochastique(s);
     fResult.writeln();
     }
