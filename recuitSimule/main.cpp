@@ -15,10 +15,6 @@ int main()
     srand (time(NULL));
 
     Graph g = Graph("../data/ali535.tsp");
-    Node n1 = Node(1,0,0);
-    Node n2 = Node(2,1,1);
-    printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
-    g.getDistanceBetweenNPoints(n1,n2);
 
     for(auto const& [key1, val1] : g.getGraphListing())
     {
@@ -43,5 +39,14 @@ int main()
     {
         cout << current << endl;
     }
+
+    Node n1 = Node(1,0,0);
+    Node n2 = Node(2,1,1);
+    Node n3 = Node(3,2,2);
+    Node n4 = Node(4,3,3);
+    printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
+    cout << g.getDistanceBetweenNPoints(4, n1, n2, n3, n4) << endl;
+    g.getNearestNode(2);
+    
     return 0;
 }

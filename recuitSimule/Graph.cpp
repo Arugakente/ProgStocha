@@ -19,21 +19,27 @@ const Node& Graph::operator[](long nodeId) const
 
 const Node& Graph::getNearestNode(long nodeId)
 {
-    //TODO implémentation
+    
 }
 
-float Graph::getDistanceBetweenNPoints(Node& p...)
+float Graph::getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...)
 {
+    float distance = p1.calculateDistance(p2);
     va_list args;
-    va_start(args, p);
+    va_start(args, p2);
 
-    /*while (&p != nullptr) {
-        //Node& i = va_arg(args, Node);
-        //cout << i.getPos().first;
-    }*/
+    for(int i=0; i<nbNodes-2; ++i){
+        cout << "i = " << i << endl;
+        Node& p = va_arg(args, Node);
+        distance += p2.calculateDistance(p);
+        p2 = p;
+    }
 
     va_end(args);
+
+    return distance;
 }
+
 
 const map<long, Node>& Graph::getGraphListing() const
 {

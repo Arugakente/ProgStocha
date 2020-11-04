@@ -105,7 +105,7 @@ public:
         }
     };
     const Node& getNearestNode(long nodeId);
-    float getDistanceBetweenNPoints(Node&p1, ...);
+    float getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...);
 
     const std::map<long, Node>& getGraphListing() const ;
     const std::vector<std::vector<float>>& getDistMat() const;
