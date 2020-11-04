@@ -65,6 +65,7 @@ main {
 		var subDef = new IloOplModelDefinition(subSource);
 		var subCplex = new IloCplex();
 		var subDataSource = new IloOplDataSource("data/"+ s +".dat");
+		var subDataNormalTable = new IloOplDataSource("normalTable.dat");
 		
 		var optimumData = new IloOplDataElement();
 		optimumData.makeElement("opti", optimum); //add the optimum value to the model's variables
