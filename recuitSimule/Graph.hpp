@@ -23,7 +23,7 @@ private:
     std::string weightType;
     std::string dataType;
 public:
-    Graph(std::string inputFile):graphListing(),name("none"),type("none"),comment("none"),dimention(0),weightType("none"),dataType("none")
+    Graph(std::string inputFile):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimention(0),weightType("none"),dataType("none")
     {
         std::ifstream loadingFile (inputFile);
 
@@ -89,6 +89,15 @@ public:
                 graphListing.insert(std::pair<long,Node>(id,Node(id,x,y)));
             }
             loadingFile.close();
+
+            for(auto const& [key1, val1] : graphListing)
+            {
+                distMat.push_back(std::vector<float>());
+                for(auto const& [key2, val2] : graphListing)
+                {
+                    distMat.back().push_back(val1.calculateDistance(val2));
+                }
+            }
         }
         else
         {
@@ -98,10 +107,10 @@ public:
     const Node& getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(Node&p1, ...);
 
-    const std::map<long, Node>& getGraphListing();
-    const std::vector<std::vector<float>>& getDistMat();
+    const std::map<long, Node>& getGraphListing() const ;
+    const std::vector<std::vector<float>>& getDistMat() const;
 
-    const Node& operator[](long nodeId);
+    const Node& operator[](long nodeId) const;
     ~Graph(){};
 };
 

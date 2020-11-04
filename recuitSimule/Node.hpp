@@ -15,14 +15,14 @@ private:
 public:
     Node(long nId,float xCoord,float yCoord):id(nId),x(xCoord),y(yCoord),alreadyTaken(false),isStart(false){};
 
-    float calculateDistance(Node& point);
+    float calculateDistance(const Node& point)const ;
 
     void setAlreadyTaken(bool value);
 
-    long getId();
-    std::pair<float, float> getPos();
-    bool getAlreadyTaken();
-    bool getIsStart();
+    long getId() const;
+    std::pair<float, float> getPos() const;
+    bool getAlreadyTaken() const;
+    bool getIsStart() const;
 
     ~Node(){};
 };
