@@ -66,7 +66,7 @@ public:
                 }
             }
             //loading graph data
-
+            int mapIndex = 0;
             while(getline(loadingFile,buffer) && buffer != "EOF")
             {
                 std::stringstream bufferStream(buffer);
@@ -86,7 +86,8 @@ public:
                     getline(bufferStream,buffer,' ');
                 float y = std::stof(buffer);
 
-                graphListing.insert(std::pair<long,Node>(id,Node(id,x,y)));
+                graphListing.insert(std::pair<long,Node>(mapIndex,Node(id,x,y)));
+                mapIndex ++ ;
             }
             loadingFile.close();
 
