@@ -17,7 +17,7 @@ const Node& Graph::operator[](long nodeId) const
     }
 }
 
-const Node& Graph::getNearestNode(long nodeId)
+const long Graph::getNearestNode(long nodeId)
 {
     
 }
@@ -40,6 +40,12 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...)
     return distance;
 }
 
+void Graph::setTaken(long nodeId)
+{
+    if(graphListing.find(nodeId) != graphListing.end())
+        graphListing.at(nodeId).setAlreadyTaken(true);
+}
+
 
 const map<long, Node>& Graph::getGraphListing() const
 {
@@ -49,4 +55,9 @@ const map<long, Node>& Graph::getGraphListing() const
 const vector<vector<float>>& Graph::getDistMat() const
 {
     return distMat;
+}
+
+long Graph::getGraphDim()
+{
+    return dimention;
 }

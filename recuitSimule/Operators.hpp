@@ -8,6 +8,6 @@
 #include<cstdlib>
 
 
-std::vector<long> randomInitialiser(const Graph& usedGraph);
-std::vector<long> gloutonInitialiser(const Graph& usedGraph);
+std::vector<long> randomInitialiser(Graph& usedGraph,long departureId = -1);
+std::vector<long> gloutonInitialiser(Graph& usedGraph,long departureId = -1);
 void basicScrambler(std::vector<long>& toScramble);

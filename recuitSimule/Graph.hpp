@@ -104,11 +104,15 @@ public:
             std::cout << "Unable to open file";
         }
     };
-    const Node& getNearestNode(long nodeId);
+    const long getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...);
+
+    void setTaken(long nodeId);
 
     const std::map<long, Node>& getGraphListing() const ;
     const std::vector<std::vector<float>>& getDistMat() const;
+
+    long getGraphDim() const;
 
     const Node& operator[](long nodeId) const;
     ~Graph(){};

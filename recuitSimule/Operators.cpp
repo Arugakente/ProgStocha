@@ -2,21 +2,49 @@
 
 using namespace std;
 
-vector<long> randomInitialiser(const Graph& usedGraph)
+vector<long> randomInitialiser(Graph& usedGraph,long departureId = -1)
 {
     vector<long> generatedSol;
+    if(departureId != -1)
+    {
+        generatedSol.push_back(departureId);
+        usedGraph.setTaken(departureId);
+    }
+
     for(auto const& [key1, val1] : usedGraph.getGraphListing())
     {
-        generatedSol.push_back(key1);
+        if(key1 != departureId)
+        {
+            generatedSol.push_back(key1);
+            usedGraph.setTaken(key1);
+        }
     }
     shuffle(generatedSol.begin(),generatedSol.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
     return generatedSol;
 }
 
-vector<long> gloutonInitialiser(const Graph& usedGraph)
+vector<long> gloutonInitialiser(Graph& usedGraph,long departureId = -1)
 {
+    vector<long> generatedSol;
+    
+    if(departureId != -1)
+    {
+        generatedSol.push_back(departureId);
+        usedGraph.setTaken(departureId);
+    }
 
+    if(departureId != -1)
+        generatedSol.push_back(departureId);
+
+    while(generatedSol.size() < usedGraph.getGraphDim())
+    {
+        generatedSol.push_back(usedGraph.getNearestNode(generatedSol.back()));
+    }
+
+    return generatedSol;
 }
+
+
 void basicScrambler(vector<long>& toScramble)
 {
     if(toScramble.size() > 1)
