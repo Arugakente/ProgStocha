@@ -22,16 +22,15 @@ const long Graph::getNearestNode(long nodeId)
     
 }
 
-float Graph::getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...)
+float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
 {
-    float distance = p1.calculateDistance(p2);
+    float distance = graphListing.at(p1).calculateDistance(graphListing.at(p2));
     va_list args;
     va_start(args, p2);
 
     for(int i=0; i<nbNodes-2; ++i){
-        cout << "i = " << i << endl;
-        Node& p = va_arg(args, Node);
-        distance += p2.calculateDistance(p);
+        long p = va_arg(args, long);
+        distance += graphListing.at(p2).calculateDistance(graphListing.at(p));
         p2 = p;
     }
 

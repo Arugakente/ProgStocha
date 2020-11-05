@@ -78,7 +78,7 @@ int main()
     Node n3 = Node(3,2,2);
     Node n4 = Node(4,3,3);
     printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
-    cout << g.getDistanceBetweenNPoints(4, n1, n2, n3, n4) << endl;
+    cout << g.getDistanceBetweenNPoints(4, 0, 1, 2, 3) << endl;
     g.getNearestNode(2);
 
     return 0;

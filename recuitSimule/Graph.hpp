@@ -106,7 +106,7 @@ public:
         }
     };
     const long getNearestNode(long nodeId);
-    float getDistanceBetweenNPoints(int nbNodes, Node& p1, Node& p2, ...);
+    float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
 
     void setTaken(long nodeId);
 
