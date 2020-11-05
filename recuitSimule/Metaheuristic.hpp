@@ -3,6 +3,7 @@
 #include<vector>
 #include<algorithm>
 #include<sstream>
+#include<limits>
 
 #include<iostream>
 
@@ -15,7 +16,7 @@ private:
     std::vector<long> generalBestPath;
     std::vector<long> currentBestPath;
 public:
-    Metaheuristic();
+    Metaheuristic(float initTemp):temperature(initTemp),energy(INT32_MAX),currentPath(),generalBestPath(),currentBestPath(){};
     const std::vector<long>& getCurrentPath();
     const std::vector<long>& getGeneralBestPath();
     const std::vector<long>& getCurrentBestPath();

@@ -18,11 +18,11 @@ private:
     std::string name;
     std::string type;
     std::string comment;
-    long dimention;
+    long dimension;
     std::string weightType;
     std::string dataType;
 public:
-    Graph(std::string inputFile):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimention(0),weightType("none"),dataType("none")
+    Graph(std::string inputFile):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimension(0),weightType("none"),dataType("none")
     {
         std::ifstream loadingFile (inputFile);
 
@@ -39,27 +39,27 @@ public:
                 getline(bufferStream,buffer,':');
                 buffer.erase(0, 1);
 
-                if(label == "NAME")
+                if(label == "NAME ")
                 {
                     name = buffer;
                 }
-                else if(label == "TYPE")
+                else if(label == "TYPE ")
                 {
                     type = buffer;
                 }
-                else if(label == "COMMENT")
+                else if(label == "COMMENT ")
                 {
                     comment = buffer;
                 }
-                else if(label == "DIMENSION")
+                else if(label == "DIMENSION ")
                 {
-                    dimention = std::stoi(buffer);
+                    dimension = std::stol(buffer);
                 }
-                else if(label == "EDGE_WEIGHT_TYPE")
+                else if(label == "EDGE_WEIGHT_TYPE ")
                 {
                     weightType = buffer;
                 }
-                else if(label == "DISPLAY_DATA_TYPE")
+                else if(label == "DISPLAY_DATA_TYPE ")
                 {
                     dataType = buffer;
                 }
@@ -88,10 +88,10 @@ public:
             }
             loadingFile.close();
 
-            for(int i = 0;i<dimention ; i++)
+            for(int i = 0;i<dimension ; i++)
             {
                 distMat.push_back(std::vector<float>());
-                for(int j = 0; j<dimention ; j++)
+                for(int j = 0; j<dimension ; j++)
                 {
                     distMat.back().push_back(graphListing[i].calculateDistance(graphListing[j]));
                 }
@@ -106,6 +106,7 @@ public:
     float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
 
     void setTaken(long nodeId);
+    void reinitTaken();
 
     const std::vector<Node>& getGraphListing() const ;
     const std::vector<std::vector<float>>& getDistMat() const;
