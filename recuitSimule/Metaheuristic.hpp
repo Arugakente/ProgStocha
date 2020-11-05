@@ -19,6 +19,7 @@ public:
     const std::vector<long>& getCurrentPath();
     const std::vector<long>& getGeneralBestPath();
     const std::vector<long>& getCurrentBestPath();
+    std::vector<long> solve();
     float getTemperature();
     float getEnergy();
     ~Metaheuristic(){};

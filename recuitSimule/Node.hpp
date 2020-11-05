@@ -6,20 +6,20 @@
 class Node
 {
 private:
-    long id;
+    long logicalNumber;
     float x;
     float y;
 
     bool alreadyTaken;
     bool isStart;
 public:
-    Node(long nId,float xCoord,float yCoord):id(nId),x(xCoord),y(yCoord),alreadyTaken(false),isStart(false){};
+    Node(long nId,float xCoord,float yCoord):logicalNumber(nId),x(xCoord),y(yCoord),alreadyTaken(false),isStart(false){};
 
     float calculateDistance(const Node& point)const ;
 
     void setAlreadyTaken(bool value);
 
-    long getId() const;
+    long getLogicalNumber() const;
     std::pair<float, float> getPos() const;
     bool getAlreadyTaken() const;
     bool getIsStart() const;

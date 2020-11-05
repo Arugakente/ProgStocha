@@ -7,7 +7,7 @@ using namespace std;
 
 const Node& Graph::operator[](long nodeId) const
 {
-    if(graphListing.find( nodeId ) != graphListing.end())
+    if(nodeId>=0 && nodeId<graphListing.size())
     {
         return graphListing.at(nodeId);
     }
@@ -72,12 +72,12 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
 
 void Graph::setTaken(long nodeId)
 {
-    if(graphListing.find(nodeId) != graphListing.end())
+    if(nodeId>=0 && nodeId<graphListing.size())
         graphListing.at(nodeId).setAlreadyTaken(true);
 }
 
 
-const map<long, Node>& Graph::getGraphListing() const
+const std::vector<Node>& Graph::getGraphListing() const
 {
     return graphListing;
 }

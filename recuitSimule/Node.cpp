@@ -16,9 +16,9 @@ void Node::setAlreadyTaken(bool value)
     alreadyTaken = value;
 }
 
-long Node::getId() const
+long Node::getLogicalNumber() const
 {
-    return id;
+    return logicalNumber;
 }
 
 pair<float, float> Node::getPos() const

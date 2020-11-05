@@ -1,6 +1,5 @@
 #pragma once
 #include<string>
-#include<map>
 #include<vector>
 #include<iostream>
 #include<fstream>
@@ -13,7 +12,7 @@
 class Graph
 {
 private:
-    std::map<long,Node> graphListing;
+    std::vector<Node> graphListing;
     std::vector<std::vector<float>> distMat;
 
     std::string name;
@@ -66,7 +65,6 @@ public:
                 }
             }
             //loading graph data
-            int mapIndex = 0;
             while(getline(loadingFile,buffer) && buffer != "EOF")
             {
                 std::stringstream bufferStream(buffer);
@@ -86,17 +84,16 @@ public:
                     getline(bufferStream,buffer,' ');
                 float y = std::stof(buffer);
 
-                graphListing.insert(std::pair<long,Node>(mapIndex,Node(id,x,y)));
-                mapIndex ++ ;
+                graphListing.push_back(Node(id,x,y));
             }
             loadingFile.close();
 
-            for(auto const& [key1, val1] : graphListing)
+            for(int i = 0;i<dimention ; i++)
             {
                 distMat.push_back(std::vector<float>());
-                for(auto const& [key2, val2] : graphListing)
+                for(int j = 0; j<dimention ; j++)
                 {
-                    distMat.back().push_back(val1.calculateDistance(val2));
+                    distMat.back().push_back(graphListing[i].calculateDistance(graphListing[j]));
                 }
             }
         }
@@ -110,7 +107,7 @@ public:
 
     void setTaken(long nodeId);
 
-    const std::map<long, Node>& getGraphListing() const ;
+    const std::vector<Node>& getGraphListing() const ;
     const std::vector<std::vector<float>>& getDistMat() const;
 
     long getGraphDim() const;
