@@ -57,8 +57,8 @@ subject to
 	
 	//stochastic constraint	
 	//if value 0.63 => takes the result in table[6,3]
-	table[ftoi(  trunc( (sum(i,j in Vertex) Z * (c[i,j]*x[i,j]) / (V[i,j]*x[i,j])) * 10 )  ), 
-	      ftoi(  trunc( ((sum(i,j in Vertex) Z * c[i,j]*x[i,j] / V[i,j]*x[i,j]))  * 100 )  ) mod 10] //ex: 63 mod 10 = 3
+	table[ftoi(  trunc( (Z - sum(i,j in Vertex) c[i,j]*x[i,j]) / sum(i,j in Vertex) (sqrt(V[i,j])*x[i,j])* 10 )  ), 
+	      ftoi(  trunc( (Z - sum(i,j in Vertex) c[i,j]*x[i,j]) / sum(i,j in Vertex) (sqrt(V[i,j])*x[i,j])* 100)  ) mod 10] //ex: 63 mod 10 = 3
 	     >= alpha;
 
 }
