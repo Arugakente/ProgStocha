@@ -16,9 +16,9 @@ int main()
 
     Graph g = Graph("../data/simpleTest.tsp");
 
-    for(auto const& [key1, val1] : g.getGraphListing())
+    for(int i =0 ; i<g.getGraphListing().size();i++)
     {
-        cout << key1 << endl;
+        cout << i << " " <<g[i].getId() << endl;
     }
 
     std::vector<std::vector<float>> test = g.getDistMat();

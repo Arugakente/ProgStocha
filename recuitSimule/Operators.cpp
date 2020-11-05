@@ -6,19 +6,19 @@ vector<long> randomInitialiser(Graph& usedGraph,long departureId)
 {
     vector<long> generatedSol;
     bool offset = false;
-    if(departureId != -1 && usedGraph.getGraphListing().find(departureId) != usedGraph.getGraphListing().end())
+    if(departureId >= 0 && departureId < usedGraph.getGraphListing().size())
     {
         generatedSol.push_back(departureId);
         usedGraph.setTaken(departureId);
         offset = true;
     }
 
-    for(auto const& [key1, val1] : usedGraph.getGraphListing())
+    for(int i = 0 ; i<usedGraph.getGraphListing().size();i++)
     {
-        if(key1 != departureId)
+        if(i != departureId)
         {
-            generatedSol.push_back(key1);
-            usedGraph.setTaken(key1);
+            generatedSol.push_back(i);
+            usedGraph.setTaken(i);
         }
     }
     shuffle(offset?generatedSol.begin()+1:generatedSol.begin(),generatedSol.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
@@ -29,7 +29,7 @@ vector<long> gloutonInitialiser(Graph& usedGraph,long departureId)
 {
     vector<long> generatedSol;
 
-    if(departureId != -1)
+    if(departureId >= 0 && departureId < usedGraph.getGraphListing().size())
     {
         generatedSol.push_back(departureId);
         usedGraph.setTaken(departureId);
