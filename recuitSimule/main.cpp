@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g = Graph("../data/ali535.tsp");
+    Graph g = Graph("../data/simpleTest.tsp");
 
     for(auto const& [key1, val1] : g.getGraphListing())
     {
@@ -29,11 +29,44 @@ int main()
         cout << endl;
     }
 
-    auto generatedTest = randomInitialiser(g);
+    auto generatedTest = randomInitialiser(g,111);
+    auto generatedTest1 = randomInitialiser(g,111);
+    auto generatedTest2 = randomInitialiser(g,111);
+
+    auto generatedTest3 = randomInitialiser(g,2);
+    auto generatedTest4 = randomInitialiser(g,2);
+    auto generatedTest5 = randomInitialiser(g,2);
+
     for(auto current : generatedTest)
     {
         cout << current << endl;
     }
+    cout << endl;
+    for(auto current : generatedTest1)
+    {
+        cout << current << endl;
+    }
+    cout << endl;
+    for(auto current : generatedTest2)
+    {
+        cout << current << endl;
+    }
+    cout << endl;
+    for(auto current : generatedTest3)
+    {
+        cout << current << endl;
+    }
+    cout << endl;
+    for(auto current : generatedTest4)
+    {
+        cout << current << endl;
+    }
+    cout << endl;
+    for(auto current : generatedTest5)
+    {
+        cout << current << endl;
+    }
+    cout << endl;
     basicScrambler(generatedTest);
     for(auto current : generatedTest)
     {
@@ -47,6 +80,6 @@ int main()
     printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
     cout << g.getDistanceBetweenNPoints(4, n1, n2, n3, n4) << endl;
     g.getNearestNode(2);
-    
+
     return 0;
 }

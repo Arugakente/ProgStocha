@@ -2,13 +2,15 @@
 
 using namespace std;
 
-vector<long> randomInitialiser(Graph& usedGraph,long departureId = -1)
+vector<long> randomInitialiser(Graph& usedGraph,long departureId)
 {
     vector<long> generatedSol;
-    if(departureId != -1)
+    bool offset = false;
+    if(departureId != -1 && usedGraph.getGraphListing().find(departureId) != usedGraph.getGraphListing().end())
     {
         generatedSol.push_back(departureId);
         usedGraph.setTaken(departureId);
+        offset = true;
     }
 
     for(auto const& [key1, val1] : usedGraph.getGraphListing())
@@ -19,26 +21,32 @@ vector<long> randomInitialiser(Graph& usedGraph,long departureId = -1)
             usedGraph.setTaken(key1);
         }
     }
-    shuffle(generatedSol.begin(),generatedSol.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
+    shuffle(offset?generatedSol.begin()+1:generatedSol.begin(),generatedSol.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
     return generatedSol;
 }
 
-vector<long> gloutonInitialiser(Graph& usedGraph,long departureId = -1)
+vector<long> gloutonInitialiser(Graph& usedGraph,long departureId)
 {
     vector<long> generatedSol;
-    
+
     if(departureId != -1)
     {
         generatedSol.push_back(departureId);
         usedGraph.setTaken(departureId);
     }
-
-    if(departureId != -1)
-        generatedSol.push_back(departureId);
+    else
+    {
+        long selected = rand()%usedGraph.getGraphDim();
+        //if no start point defined : random in graph
+         generatedSol.push_back(selected);
+         usedGraph.setTaken(selected);
+    }
 
     while(generatedSol.size() < usedGraph.getGraphDim())
     {
-        generatedSol.push_back(usedGraph.getNearestNode(generatedSol.back()));
+        long selected = usedGraph.getNearestNode(generatedSol.back());
+        generatedSol.push_back(selected);
+        usedGraph.setTaken(selected);
     }
 
     return generatedSol;
@@ -54,7 +62,7 @@ void basicScrambler(vector<long>& toScramble)
 
         while(permuted2 == permuted1)
         {
-            int permuted2 = rand()%toScramble.size();
+            permuted2 = rand()%toScramble.size();
         }
         long tmp = toScramble[permuted1];
         toScramble[permuted1] = toScramble[permuted2];

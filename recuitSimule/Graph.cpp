@@ -57,7 +57,7 @@ const vector<vector<float>>& Graph::getDistMat() const
     return distMat;
 }
 
-long Graph::getGraphDim()
+long Graph::getGraphDim() const
 {
     return dimention;
 }
