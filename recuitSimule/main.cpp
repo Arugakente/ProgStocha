@@ -18,7 +18,7 @@ int main()
 
     for(int i =0 ; i<g.getGraphListing().size();i++)
     {
-        cout << i << " " <<g[i].getId() << endl;
+        cout << i << " " <<g[i].getLogicalNumber() << endl;
     }
 
     std::vector<std::vector<float>> test = g.getDistMat();
