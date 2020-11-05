@@ -2,7 +2,7 @@
 
 //for debug
 #include "Operators.hpp"
-
+#include "Metaheuristic.hpp"
 #include <iostream>
 #include<ctime>
 #include<cstdlib>
@@ -29,25 +29,23 @@ int main()
         cout << endl;
     }
 
-    
-    /*Node n1 = Node(1,0,0);
+    Node n1 = Node(1,0,0);
     Node n2 = Node(2,1,1);
     Node n3 = Node(3,2,2);
     Node n4 = Node(4,3,3);
     printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
     cout << g.getDistanceBetweenNPoints(4, 0, 1, 2, 3) << endl;
     cout << "------------" << endl;
-    g.getNearestNode(0);
-    g.getNearestNode(1);
-    g.getNearestNode(2);
-    g.getNearestNode(3);
-    g.getNearestNode(4);
-    g.getNearestNode(5);
-    g.getNearestNode(6);
-    g.getNearestNode(7);
-    g.getNearestNode(8);
-    g.getNearestNode(9);*/
-    
+    cout << "nearest node for 0 " << g.getNearestNode(0) << endl;
+    cout << "nearest node for 1 " << g.getNearestNode(1) << endl;
+    cout << "nearest node for 2 " << g.getNearestNode(2) << endl;
+    cout << "nearest node for 3 " << g.getNearestNode(3) << endl;
+    cout << "nearest node for 4 " << g.getNearestNode(4) << endl;
+    cout << "nearest node for 5 " << g.getNearestNode(5) << endl;
+    cout << "nearest node for 6 " << g.getNearestNode(6) << endl;
+    cout << "nearest node for 7 " << g.getNearestNode(7) << endl;
+    cout << "nearest node for 8 " << g.getNearestNode(8) << endl;
+    cout << "nearest node for 9 " << g.getNearestNode(9) << endl;
 
     auto generatedTest = randomInitialiser(g,111);
     g.reinitTaken();
@@ -62,42 +60,69 @@ int main()
     g.reinitTaken();
     auto generatedTest5 = randomInitialiser(g,2);
     g.reinitTaken();
+    auto generatedTest6 = gloutonInitialiser(g,0);
+    g.reinitTaken();
+    auto generatedTest7 = gloutonInitialiser(g,8);
+    g.reinitTaken();
+    auto generatedTest8 = gloutonInitialiser(g,9);
+    g.reinitTaken();
 
     for(auto current : generatedTest)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
     cout << endl;
     for(auto current : generatedTest1)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
     cout << endl;
     for(auto current : generatedTest2)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
     cout << endl;
     for(auto current : generatedTest3)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
     cout << endl;
     for(auto current : generatedTest4)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
     cout << endl;
     for(auto current : generatedTest5)
     {
-        cout << current << endl;
+        cout << current << " ";
+    }
+    cout << endl;
+    for(auto current : generatedTest6)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
+    for(auto current : generatedTest7)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
+    for(auto current : generatedTest8)
+    {
+        cout << current << " ";
     }
     cout << endl;
     basicScrambler(generatedTest);
     for(auto current : generatedTest)
     {
-        cout << current << endl;
+        cout << current << " ";
     }
+    cout << endl;
 
     return 0;
+
+    Metaheuristic a((float)(100.0),g,basicScrambler,randomInitialiser);
+    Metaheuristic b((float)(100.0),g,basicScrambler,gloutonInitialiser);
+
+    a.solve();
 }

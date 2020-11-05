@@ -19,36 +19,36 @@ const Node& Graph::operator[](long nodeId) const
 
 const long Graph::getNearestNode(long nodeId)
 {
+
+    vector<float> indexList;
+    for(int i=0; i<graphListing.size();i++)
+    {
+        indexList.push_back(i);
+    }
+
     vector<float> listDist;
     for(int i=0; i<distMat.size(); ++i){
         listDist.push_back(distMat.at(i).at(nodeId));
     }
 
     listDist.erase(listDist.begin()+nodeId);
+    indexList.erase(indexList.begin()+nodeId);
 
     while (listDist.size()!=0){
         int minElementIndex = std::min_element(listDist.begin(),listDist.end()) - listDist.begin();
-        int minElement = *std::min_element(listDist.begin(), listDist.end());
+        //int minElement = *std::min_element(listDist.begin(), listDist.end());
 
-        if(minElementIndex >= nodeId){
-            minElementIndex ++;
+        if(!graphListing[indexList.at(minElementIndex)].getAlreadyTaken()){
+            //cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getLogicalNumber() << 
+            //" " << minElementIndex << " " << graphListing.at(minElementIndex).getLogicalNumber() << endl;
+            return indexList.at(minElementIndex);
         }
-
-        for(int i=0; i<graphListing.size(); ++i)
-        {
-            if(i == minElementIndex){
-                if(!graphListing.at(i).getAlreadyTaken()){
-                    /*cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getLogicalNumber() << 
-                    " " << minElementIndex << " " << graphListing.at(minElementIndex).getLogicalNumber() << endl;*/
-                    return minElementIndex;
-                }
-                else{
-                    listDist.erase(listDist.begin()+minElementIndex);
-                }
-            }
+        else{
+            listDist.erase(listDist.begin()+minElementIndex);
+            indexList.erase(indexList.begin()+minElementIndex);
         }
     }
-    
+
     assert(false);
 }
 

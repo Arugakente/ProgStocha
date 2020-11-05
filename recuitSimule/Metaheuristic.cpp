@@ -5,19 +5,28 @@
 #include<iostream>
 using namespace std;
 
-const vector<long>& Metaheuristic::getCurrentPath()
+const vector<long> Metaheuristic::getCurrentPath()
 {
-    return currentPath;
+    vector<long> toReturn;
+    for(auto current : currentPath)
+        toReturn.push_back(toCompute[current].getLogicalNumber());
+    return toReturn;
 }
 
-const vector<long>& Metaheuristic::getGeneralBestPath()
+const vector<long> Metaheuristic::getGeneralBestPath()
 {
-    return generalBestPath;
+    vector<long> toReturn;
+    for(auto current : generalBestPath)
+        toReturn.push_back(toCompute[current].getLogicalNumber());
+    return toReturn;
 }
 
-const vector<long>& Metaheuristic::getCurrentBestPath()
+const vector<long> Metaheuristic::getCurrentBestPath()
 {
-    return currentBestPath;
+    vector<long> toReturn;
+    for(auto current : currentBestPath)
+        toReturn.push_back(toCompute[current].getLogicalNumber());
+    return toReturn;
 }
 
 float Metaheuristic::getTemperature()
@@ -30,3 +39,10 @@ float Metaheuristic::getEnergy()
     return energy;
 }
 
+vector<long>& Metaheuristic::solve(int initialIndex)
+{
+    vector<long> a = initialBuilder(toCompute,1);
+    randomiser(a);
+
+    return generalBestPath;
+}
