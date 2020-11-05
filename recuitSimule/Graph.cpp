@@ -34,13 +34,11 @@ const long Graph::getNearestNode(long nodeId)
             minElementIndex ++;
         }
 
-        int pos = 0;
-        int idCol = 0;
-        for(auto const& [key1, val1] : graphListing)
+        for(int i=0; i<graphListing.size(); ++i)
         {
-            if(key1 == minElementIndex){
-                if(!val1.getAlreadyTaken()){
-                    //cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getId() << " " << minElementIndex << " " << val1.getId() << endl;
+            if(i == minElementIndex){
+                if(!graphListing.at(i).getAlreadyTaken()){
+                    cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getLogicalNumber() << " " << minElementIndex << " " << graphListing.at(minElementIndex).getLogicalNumber() << endl;
                     return minElementIndex;
                 }
                 else{

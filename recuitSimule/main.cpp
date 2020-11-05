@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g = Graph("../data/simpleTest.tsp");
+    Graph g = Graph("../data/simpleTestRandom.tsp");
 
     for(int i =0 ; i<g.getGraphListing().size();i++)
     {
@@ -29,7 +29,7 @@ int main()
         cout << endl;
     }
 
-    /*
+    
     Node n1 = Node(1,0,0);
     Node n2 = Node(2,1,1);
     Node n3 = Node(3,2,2);
@@ -47,8 +47,8 @@ int main()
     g.getNearestNode(7);
     g.getNearestNode(8);
     g.getNearestNode(9);
-    */
-
+    
+/*
     auto generatedTest = randomInitialiser(g,111);
     auto generatedTest1 = randomInitialiser(g,111);
     auto generatedTest2 = randomInitialiser(g,111);
@@ -91,7 +91,7 @@ int main()
     for(auto current : generatedTest)
     {
         cout << current << endl;
-    }
+    }*/
 
     return 0;
 }
