@@ -25,9 +25,29 @@ int main()
     for(auto current : test)
     {
         for(auto subcurrent : current)
-            cout << subcurrent << " ";
+            cout << subcurrent << "\t";
         cout << endl;
     }
+
+    /*
+    Node n1 = Node(1,0,0);
+    Node n2 = Node(2,1,1);
+    Node n3 = Node(3,2,2);
+    Node n4 = Node(4,3,3);
+    printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
+    cout << g.getDistanceBetweenNPoints(4, 0, 1, 2, 3) << endl;
+    cout << "------------" << endl;
+    g.getNearestNode(0);
+    g.getNearestNode(1);
+    g.getNearestNode(2);
+    g.getNearestNode(3);
+    g.getNearestNode(4);
+    g.getNearestNode(5);
+    g.getNearestNode(6);
+    g.getNearestNode(7);
+    g.getNearestNode(8);
+    g.getNearestNode(9);
+    */
 
     auto generatedTest = randomInitialiser(g,111);
     auto generatedTest1 = randomInitialiser(g,111);
@@ -72,14 +92,6 @@ int main()
     {
         cout << current << endl;
     }
-
-    Node n1 = Node(1,0,0);
-    Node n2 = Node(2,1,1);
-    Node n3 = Node(3,2,2);
-    Node n4 = Node(4,3,3);
-    printf("Distance entre les deux points n1 et n2 : %f\n", n1.calculateDistance(n2));
-    cout << g.getDistanceBetweenNPoints(4, 0, 1, 2, 3) << endl;
-    g.getNearestNode(2);
 
     return 0;
 }

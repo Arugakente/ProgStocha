@@ -19,7 +19,38 @@ const Node& Graph::operator[](long nodeId) const
 
 const long Graph::getNearestNode(long nodeId)
 {
+    vector<float> listDist;
+    for(int i=0; i<distMat.size(); ++i){
+        listDist.push_back(distMat.at(i).at(nodeId));
+    }
+
+    listDist.erase(listDist.begin()+nodeId);
+
+    while (listDist.size()!=0){
+        int minElementIndex = std::min_element(listDist.begin(),listDist.end()) - listDist.begin();
+        int minElement = *std::min_element(listDist.begin(), listDist.end());
+
+        if(minElementIndex >= nodeId){
+            minElementIndex ++;
+        }
+
+        int pos = 0;
+        int idCol = 0;
+        for(auto const& [key1, val1] : graphListing)
+        {
+            if(key1 == minElementIndex){
+                if(!val1.getAlreadyTaken()){
+                    //cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getId() << " " << minElementIndex << " " << val1.getId() << endl;
+                    return minElementIndex;
+                }
+                else{
+                    listDist.erase(listDist.begin()+minElementIndex);
+                }
+            }
+        }
+    }
     
+    assert(false);
 }
 
 float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
