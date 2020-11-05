@@ -74,6 +74,13 @@ void Graph::setTaken(long nodeId)
         graphListing.at(nodeId).setAlreadyTaken(true);
 }
 
+void Graph::reinitTaken()
+{
+    for(int i = 0 ; i< graphListing.size() ; i++)
+    {
+        graphListing.at(i).setAlreadyTaken(false);
+    }
+}
 
 const std::vector<Node>& Graph::getGraphListing() const
 {
@@ -87,5 +94,5 @@ const vector<vector<float>>& Graph::getDistMat() const
 
 long Graph::getGraphDim() const
 {
-    return dimention;
+    return dimension;
 }

@@ -50,12 +50,18 @@ int main()
     
 /*
     auto generatedTest = randomInitialiser(g,111);
+    g.reinitTaken();
     auto generatedTest1 = randomInitialiser(g,111);
+    g.reinitTaken();
     auto generatedTest2 = randomInitialiser(g,111);
+    g.reinitTaken();
 
     auto generatedTest3 = randomInitialiser(g,2);
+    g.reinitTaken();
     auto generatedTest4 = randomInitialiser(g,2);
+    g.reinitTaken();
     auto generatedTest5 = randomInitialiser(g,2);
+    g.reinitTaken();
 
     for(auto current : generatedTest)
     {
