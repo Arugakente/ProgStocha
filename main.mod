@@ -24,12 +24,14 @@ main {
 		var subDef = new IloOplModelDefinition(subSource);
 		var subCplex = new IloCplex();
 		var subDataSource = new IloOplDataSource("data/"+ s +".dat");
+		var subDataSource2 = new IloOplDataSource("data/"+ s +"_subtours.dat");
 		
 		subCplex.tilim = Data.timeLimit;
 		
 		var Opl0 = new IloOplModel(subDef, subCplex);
 		
 		Opl0.addDataSource(subDataSource);
+		Opl0.addDataSource(subDataSource2);
 		Opl0.generate();
 		
 		var debut = new Date();
@@ -65,7 +67,10 @@ main {
 		var subDef = new IloOplModelDefinition(subSource);
 		var subCplex = new IloCplex();
 		var subDataSource = new IloOplDataSource("data/"+ s +".dat");
-		var subDataNormalTable = new IloOplDataSource("normalTable.dat");
+		var subDataSource2 = new IloOplDataSource("data/"+ s +"_subtours.dat");
+		var subDataSource3 = new IloOplDataSource("data/"+ s +"_covMatrix.dat");
+		
+		var subDataNormalTable = new IloOplDataSource("normalTable.dat"); //normal table (for probability values)
 		
 		var optimumData = new IloOplDataElement();
 		optimumData.makeElement("opti", optimum); //add the optimum value to the model's variables
@@ -75,6 +80,8 @@ main {
 		var Opl0 = new IloOplModel(subDef, subCplex);
 		
 		Opl0.addDataSource(subDataSource);
+		Opl0.addDataSource(subDataSource2);
+		Opl0.addDataSource(subDataSource3);
 		Opl0.addDataSource(optimumData);
 		Opl0.generate();
 		

@@ -5,7 +5,7 @@ import os
 import numpy as np
 from classes.point import Point
 
-ifile = open("../data/rawData/d6.tsp", "r")
+ifile = open("../data/rawData/" + sys.argv[1] + ".tsp", "r")
 
 dim = 0
 points = []
@@ -43,7 +43,7 @@ for i in range(dim):
 			matrix[(i,j)] = distance
 			matrix[(j,i)] = distance
 
-ofile = open("../data/export_dist.dat", "w")
+ofile = open("../data/" + sys.argv[1] + ".dat", "w")
 print("nbVertex = " + str(dim) + ";", file=ofile, end=os.linesep)
 print("c = [", file=ofile)
 
@@ -67,7 +67,7 @@ ofile.close()
 for i in range(1 << dim):
 	all_path.append([labels[j] for j in range(dim) if (i & (1 << j))])
 
-ofile = open("../data/export_subtours.dat", "w")
+ofile = open("../data/" + sys.argv[1] + "_subtours.dat", "w")
 print("Subtours = {", file=ofile)
 
 for i in range(1,len(all_path)-1):

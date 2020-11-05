@@ -4,28 +4,30 @@
  * Creation Date: 3 nov. 2020 at 10:50:26
  *********************************************/
 
+using CP;
  
 int nbVertex = ...;
-
 range Vertex = 1..nbVertex;
 
 float opti = ...; //exact solution optimum
+float Z = 1.3 * opti; //optimum majoration
 
-float Z = 0.3 * opti; //optimum majoration
+float alpha = 0.8;
 
 float c[Vertex, Vertex] = ...; //average cost
 
-//TODO : probability version
-//importer la table de la loi normale (en dat)
+float V[Vertex, Vertex] = ...; //covariance matrix (generated)
+
+{int} t = {0, 1, 2};
+
+float table[0..40, 0..9] = ...;
 
 tuple Subtour
 {
-	int size;
+	int len;
 	{int} subtour;
 }
 {Subtour} Subtours = ...; //generated in another file
-
-float alpha = 0.9;
 
 
 dvar boolean x[Vertex,Vertex]; //assignment
@@ -41,7 +43,7 @@ subject to
 	}
 	
 	forall(i,j in Vertex)
-	{	
+	{
 		x[i,j] == 0 || x[i,j] == 1;   // x(i,j) c {0,1}
 	}
 	
@@ -49,23 +51,14 @@ subject to
 	forall(j in Vertex) sum(i in Vertex) x[i,j] == 1;
 	
 	forall(S in Subtours)   //subtour
-	{    
-		sum(i,j in S.subtour) x[i,j] <= S.size - 1;
+	{
+		sum(i,j in S.subtour) x[i,j] <= S.len - 1;
 	}
 	
-	//stochastic constraint
-
-	//Utiliser la fonction de répartition (comment faire pour calculer les integrales ?)
-	//Probabilité : différente pour chaque x(ij)
-	
-	//Matrice variance covariance -> comment elle est generee ?
-	//covariance entre deux points vs. covariance d'un arc (??)
-	
-	//Ce sont bien les couts qui sont aleatoires
-	
-	//sum(i,j in Vertex) 
-	
-	//-> somme des moyenne + somme des variances  => N(sum(avg), sum(var))
-
+	//stochastic constraint	
+	//if value 0.63 => takes the result in table[6,3]
+	table[ftoi(  trunc( (sum(i,j in Vertex) Z * (c[i,j]*x[i,j]) / (V[i,j]*x[i,j])) * 10 )  ), 
+	      ftoi(  trunc( ((sum(i,j in Vertex) Z * c[i,j]*x[i,j] / V[i,j]*x[i,j]))  * 100 )  ) mod 10] //ex: 63 mod 10 = 3
+	     >= alpha;
 
 }

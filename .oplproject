@@ -9,6 +9,26 @@
 			<ref name="solDeterministe.mod" type="model">
 			</ref>
 		</config>
+		<config default="false" name="Configuration 2" category="opl">
+			<ref name="solDeterministe.mod" type="model">
+			</ref>
+			<ref name="data/d6.dat" type="data">
+			</ref>
+			<ref name="data/d6_subtours.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuration 3" category="opl">
+			<ref name="solStochastique.mod" type="model">
+			</ref>
+			<ref name="data/d6.dat" type="data">
+			</ref>
+			<ref name="data/d6_subtours.dat" type="data">
+			</ref>
+			<ref name="data/d6 _covMatrix.dat" type="data">
+			</ref>
+			<ref name="normalTable.dat" type="data">
+			</ref>
+		</config>
 	</configs>
 	
 </project>

@@ -6,6 +6,8 @@
 
 //file ending with with _subtour.dat => generated list of subtour
 
+using CP;
+
 
 int nbVertex = ...;
 
@@ -15,7 +17,7 @@ float c[Vertex, Vertex] = ...; //cost
 
 tuple Subtour
 {
-	int size;
+	int len;
 	{int} subtour;
 }
 {Subtour} Subtours = ...; //generated in another file
@@ -43,6 +45,6 @@ subject to
 	
 	forall(S in Subtours) //subtour
 	{    
-		sum(i,j in S.subtour) x[i,j] <= S.size - 1;
+		sum(i,j in S.subtour) x[i,j] <= S.len - 1;
 	}
 }
