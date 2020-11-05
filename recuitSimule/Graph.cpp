@@ -38,7 +38,8 @@ const long Graph::getNearestNode(long nodeId)
         {
             if(i == minElementIndex){
                 if(!graphListing.at(i).getAlreadyTaken()){
-                    cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getLogicalNumber() << " " << minElementIndex << " " << graphListing.at(minElementIndex).getLogicalNumber() << endl;
+                    /*cout << minElement << " " << nodeId << " " << graphListing.at(nodeId).getLogicalNumber() << 
+                    " " << minElementIndex << " " << graphListing.at(minElementIndex).getLogicalNumber() << endl;*/
                     return minElementIndex;
                 }
                 else{
