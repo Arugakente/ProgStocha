@@ -26,8 +26,6 @@
 			</ref>
 			<ref name="data/d6 _covMatrix.dat" type="data">
 			</ref>
-			<ref name="normalTable.dat" type="data">
-			</ref>
 		</config>
 	</configs>
 	
