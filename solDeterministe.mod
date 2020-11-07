@@ -6,11 +6,7 @@
 
 //file ending with with _subtour.dat => generated list of subtour
 
-using CP;
-
-
 int nbVertex = ...;
-
 range Vertex = 1..nbVertex;
 
 float c[Vertex, Vertex] = ...; //cost

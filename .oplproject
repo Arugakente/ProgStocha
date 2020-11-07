@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="ASCII"?><project>
 	<version>1.0</version>
 	<configs>
-		<config default="true" name="Configuration 1" category="opl">
-			<ref name="data/data0.dat" type="data">
-			</ref>
-			<ref name="data/data0 _subtour.dat" type="data">
-			</ref>
+		<config default="true" name="Configuration 2" category="opl">
 			<ref name="solDeterministe.mod" type="model">
 			</ref>
-		</config>
-		<config default="false" name="Configuration 2" category="opl">
-			<ref name="solDeterministe.mod" type="model">
+			<ref name="data/d10_subtours.dat" type="data">
 			</ref>
-			<ref name="data/d6.dat" type="data">
-			</ref>
-			<ref name="data/d6_subtours.dat" type="data">
+			<ref name="data/d10.dat" type="data">
 			</ref>
 		</config>
 		<config default="false" name="Configuration 3" category="opl">
 			<ref name="solStochastique.mod" type="model">
 			</ref>
-			<ref name="data/d6.dat" type="data">
+			<ref name="data/d10.dat" type="data">
 			</ref>
-			<ref name="data/d6_subtours.dat" type="data">
+			<ref name="data/d10_subtours.dat" type="data">
 			</ref>
-			<ref name="data/d6 _covMatrix.dat" type="data">
+			<ref name="data/d10_covMatrix.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuration 4" category="opl">
+			<ref name="main.mod" type="model">
+			</ref>
+			<ref name="mainData.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuration 5" category="opl">
+			<ref name="solDeterministeMTZ.mod" type="model">
+			</ref>
+			<ref name="data/d10.dat" type="data">
 			</ref>
 		</config>
 	</configs>

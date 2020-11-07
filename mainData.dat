@@ -1,0 +1,13 @@
+datafile = {
+"d6",
+};
+
+datafileMTZ = {
+    "d6",
+    "d10",
+    //"d20",
+};
+
+timeLimit = 240;
+
+
