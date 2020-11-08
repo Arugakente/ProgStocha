@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?><project>
 	<version>1.0</version>
 	<configs>
-		<config default="true" name="Configuration 2" category="opl">
+		<config default="false" name="Configuration main" category="opl">
+			<ref name="main.mod" type="model">
+			</ref>
+			<ref name="mainData.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuration MTZ" category="opl">
+			<ref name="solDeterministeMTZ.mod" type="model">
+			</ref>
+			<ref name="data/d10.dat" type="data">
+			</ref>
+		</config>
+		<config default="false" name="Configuration Stocha" category="opl">
+			<ref name="solStochastique.mod" type="model">
+			</ref>
+			<ref name="data/d10.dat" type="data">
+			</ref>
+			<ref name="data/d10_subtours.dat" type="data">
+			</ref>
+		</config>
+		<config default="true" name="Configuration Deter" category="opl">
 			<ref name="solDeterministe.mod" type="model">
 			</ref>
 			<ref name="data/d10_subtours.dat" type="data">
@@ -9,26 +29,10 @@
 			<ref name="data/d10.dat" type="data">
 			</ref>
 		</config>
-		<config default="false" name="Configuration 3" category="opl">
-			<ref name="solStochastique.mod" type="model">
+		<config default="false" name="Configuration simu" category="opl">
+			<ref name="simu.mod" type="model">
 			</ref>
-			<ref name="data/d10.dat" type="data">
-			</ref>
-			<ref name="data/d10_subtours.dat" type="data">
-			</ref>
-			<ref name="data/d10_covMatrix.dat" type="data">
-			</ref>
-		</config>
-		<config default="false" name="Configuration 4" category="opl">
-			<ref name="main.mod" type="model">
-			</ref>
-			<ref name="mainData.dat" type="data">
-			</ref>
-		</config>
-		<config default="false" name="Configuration 5" category="opl">
-			<ref name="solDeterministeMTZ.mod" type="model">
-			</ref>
-			<ref name="data/d10.dat" type="data">
+			<ref name="simuData.dat" type="data">
 			</ref>
 		</config>
 	</configs>

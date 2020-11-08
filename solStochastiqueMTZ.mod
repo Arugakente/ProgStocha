@@ -10,15 +10,31 @@ range Vertex = 1..nbVertex;
 float opti = ...; //exact solution optimum
 float Z = 1.3 * opti; //optimum majoration
 
-float alpha = 0.99; // alpha >= 0.5 !!!
+float alpha = ...;
+float quantileAlpha;
 
 float c[Vertex, Vertex] = ...; //cost
 
-float V[Vertex, Vertex] = ...; //covariance matrix (generated)
+float V[Vertex, Vertex]; //covariance matrix (generated)
+float stdDevCoef = ...;
 
 dvar boolean x[Vertex,Vertex]; //assignment
 dvar int u[2..nbVertex];
 
+
+execute{
+	if (alpha >= 0.5) quantileAlpha =  5.5556 * (1-((1-alpha)/alpha)^0.1185);
+	else { //alpha < 0.5
+	alpha = 1 - alpha;
+	quantileAlpha =  - (5.5556 * (1-((1-alpha)/alpha)^0.1185));	
+	}
+	
+	for (var i in Vertex){
+		for (var j in Vertex){	
+			V[i][j] = (stdDevCoef * c[i][j])^2;
+		}		
+	}
+}
 
 minimize sum(v1,v2 in Vertex) x[v1, v2] * c[v1,v2];
 
@@ -49,8 +65,8 @@ subject to
 	//stochastic constraint	(Shore approximation)
 	//center and reduce Z : (Z - avg(c)*x) / V^0.5*x = N(0,1)
 	
-	//         (Z - avg(c)*x)              >=           phi^-1(alpha)               *            V^0.5*x
-	(Z - sum(i,j in Vertex) c[i,j]*x[i,j]) >= 5.5556 * (1-((1-alpha)/alpha)^0.1185) * (sum(i,j in Vertex) (V[i,j]^0.5*x[i,j]));
+	//         (Z - avg(c)*x)              >= phi^-1(alpha) *            V^0.5*x
+	(Z - sum(i,j in Vertex) c[i,j]*x[i,j]) >= quantileAlpha * (sum(i,j in Vertex) (V[i,j]^0.5*x[i,j]));
 	
 	
 }

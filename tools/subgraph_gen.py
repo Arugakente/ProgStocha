@@ -44,34 +44,25 @@ for i in range(dim):
 			matrix[(j,i)] = distance
 
 ofile = open("../data/" + sys.argv[1] + ".dat", "w")
-ofile2 = open("../data/" + sys.argv[1] + "_covMatrix.dat", "w")
 print("nbVertex = " + str(dim) + ";", file=ofile, end=os.linesep)
 print("c = [", file=ofile)
-print("V = [", file=ofile2)
 
 for i in range(dim):
 	ofile.write("\t[")
-	ofile2.write("\t[")
 
 	for j in range(dim):
 		ofile.write(str(matrix[(i,j)]))
-		ofile2.write(str((matrix[(i,j)]*0.1)*(matrix[(i,j)]*0.1)))
 
 		if(j<dim-1):
 			ofile.write(", ")
-			ofile2.write(", ")
 
 	if(i<dim-1):
 		print("],", file=ofile)
-		print("],", file=ofile2)
 	else:
 		print("]", file=ofile)
-		print("]", file=ofile2)
 
 print("];", file=ofile)
-print("];", file=ofile2)
 ofile.close()
-ofile2.close()
 
 for i in range(1 << dim):
 	all_path.append([labels[j] for j in range(dim) if (i & (1 << j))])
