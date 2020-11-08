@@ -1,6 +1,6 @@
 /*********************************************
  * OPL 12.9.0.0 Model
- * Author: Aru
+ * Author: G. GOSSET, Q. LASOTA, T. PICHARD, G. SCION
  * Creation Date: 8 nov. 2020 at 10:31:56
  *********************************************/
  
@@ -20,7 +20,7 @@ main {
 	
 	var optimumMTZ;
 	
-	var data = "d6";
+	var data = "d20";
 	
 //Partie Deterministe -------------------------------------  
 		

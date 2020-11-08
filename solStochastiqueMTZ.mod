@@ -1,6 +1,6 @@
 /*********************************************
  * OPL 12.9.0.0 Model
- * Author: Aru
+ * Author: G. GOSSET, Q. LASOTA, T. PICHARD, G. SCION
  * Creation Date: 7 nov. 2020 at 13:59:26
  *********************************************/
 
