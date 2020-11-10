@@ -69,3 +69,25 @@ void basicScrambler(vector<long>& toScramble)
         toScramble[permuted2] = tmp;
     }
 }
+
+void multipleScramble(vector<long>& toScramble)
+{
+    if(toScramble.size() > 1)
+    {
+        float probability = 1.0;
+        while((float)(rand()) /(float)(RAND_MAX)<=probability)
+        {
+            int permuted1 = rand()%toScramble.size();
+            int permuted2 = rand()%toScramble.size();
+
+            while(permuted2 == permuted1)
+            {
+                permuted2 = rand()%toScramble.size();
+            }
+            long tmp = toScramble[permuted1];
+            toScramble[permuted1] = toScramble[permuted2];
+            toScramble[permuted2] = tmp;
+            probability /= 2.0;
+        }
+    }
+}

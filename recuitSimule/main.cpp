@@ -121,12 +121,20 @@ int main()
 */
     Metaheuristic a((float)(150.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
     Metaheuristic b((float)(150.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
+    Metaheuristic c((float)(150.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./mutli_rand.csv");
+    Metaheuristic d((float)(150.0),(float)(0.05),g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();
     g.reinitTaken();
     cout << "test glouton" << endl;
     vector<long> test2 = b.solve();
+    g.reinitTaken();
+    cout << "test random" << endl;
+    vector<long> test3 = c.solve();
+    g.reinitTaken();
+    cout << "test glouton" << endl;
+    vector<long> test4 = d.solve();
 
     for(auto current : test1)
     {
@@ -136,6 +144,20 @@ int main()
     cout << endl;
 
     for(auto current : test2)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
+    cout << endl;
+
+    for(auto current : test3)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
+    cout << endl;
+
+    for(auto current : test4)
     {
         cout << current << " ";
     }
