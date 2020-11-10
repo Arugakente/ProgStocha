@@ -1,6 +1,7 @@
 #include "Metaheuristic.hpp"
 #include<algorithm>
 #include<sstream>
+#include<cmath>
 
 #include<iostream>
 using namespace std;
@@ -41,8 +42,49 @@ float Metaheuristic::getEnergy()
 
 vector<long>& Metaheuristic::solve(int initialIndex)
 {
-    vector<long> a = initialBuilder(toCompute,1);
-    randomiser(a);
+    vector<long> currentPath = initialBuilder(toCompute,initialIndex);
+    currentBestPath = currentPath;
+    generalBestPath = currentPath;
+    cout << "original solution" << endl;
+    for(auto current : currentPath)
+    {
+        cout << current << " ";
+    }
+
+    energy = toCompute.getDistanceBetweenNPoints(currentPath);
+    generalBestEnergy = energy;
+    currentBestEnergy = energy;
+
+    while(temperature >= thresold)
+    {
+        cout << endl;
+
+        randomiser(currentPath);
+        energy = toCompute.getDistanceBetweenNPoints(currentPath);
+        if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
+        {
+            if(energy < generalBestEnergy)
+            {
+                generalBestPath = currentPath;
+                generalBestEnergy = energy;
+            }
+            currentBestPath = currentPath;
+            currentBestEnergy = energy;
+        }
+        else
+        {
+            currentPath = currentBestPath;
+            energy = currentBestEnergy;
+
+        }
+
+        cout << temperature << endl;
+        cout << "current energy : " << energy << endl;
+        cout << "current best energy : " << currentBestEnergy << endl;
+        cout << "best energy : " << generalBestEnergy << endl;
+
+        temperature = temperature*0.99999;
+    }
 
     return generalBestPath;
 }

@@ -11,9 +11,15 @@ class Metaheuristic
 {
 private:
     float temperature;
+    float thresold;
+
     float energy;
     std::vector<long> currentPath;
+
+    float generalBestEnergy;
     std::vector<long> generalBestPath;
+
+    float currentBestEnergy;
     std::vector<long> currentBestPath;
 
     Graph& toCompute;
@@ -21,7 +27,11 @@ private:
     void (*randomiser)(std::vector<long>&) ;
     std::vector<long> (*initialBuilder)(Graph&,long) ;
 public:
-    Metaheuristic(float initTemp,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&,long)):temperature(initTemp),energy(std::numeric_limits<float>::max()),currentPath(),generalBestPath(),currentBestPath(),toCompute(loaded),randomiser(randParam),initialBuilder(initParam){};
+    Metaheuristic(float initTemp,float thsld,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&,long)):temperature(initTemp),thresold(thsld),
+                                                                                                                                  energy(0),currentPath(),
+                                                                                                                                  generalBestEnergy(0),generalBestPath(),
+                                                                                                                                  currentBestEnergy(0),currentBestPath(),
+                                                                                                                                  toCompute(loaded),randomiser(randParam),initialBuilder(initParam){};
     const std::vector<long> getCurrentPath();
     const std::vector<long> getGeneralBestPath();
     const std::vector<long> getCurrentBestPath();

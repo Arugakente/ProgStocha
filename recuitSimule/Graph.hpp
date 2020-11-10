@@ -39,27 +39,27 @@ public:
                 getline(bufferStream,buffer,':');
                 buffer.erase(0, 1);
 
-                if(label == "NAME ")
+                if(label == "NAME " || label == "NAME")
                 {
                     name = buffer;
                 }
-                else if(label == "TYPE ")
+                else if(label == "TYPE " || label == "TYPE" )
                 {
                     type = buffer;
                 }
-                else if(label == "COMMENT ")
+                else if(label == "COMMENT " || label == "COMMENT")
                 {
                     comment = buffer;
                 }
-                else if(label == "DIMENSION ")
+                else if(label == "DIMENSION " || label == "DIMENSION")
                 {
                     dimension = std::stol(buffer);
                 }
-                else if(label == "EDGE_WEIGHT_TYPE ")
+                else if(label == "EDGE_WEIGHT_TYPE " || label == "EDGE_WEIGHT_TYPE" )
                 {
                     weightType = buffer;
                 }
-                else if(label == "DISPLAY_DATA_TYPE ")
+                else if(label == "DISPLAY_DATA_TYPE " || label == "DISPLAY_DATA_TYPE" )
                 {
                     dataType = buffer;
                 }
@@ -104,6 +104,7 @@ public:
     };
     const long getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
+    float getDistanceBetweenNPoints(const std::vector<long>& nodeList);
 
     void setTaken(long nodeId);
     void reinitTaken();

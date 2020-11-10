@@ -69,6 +69,16 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
     return distance;
 }
 
+float Graph::getDistanceBetweenNPoints(const vector<long>& nodeList)
+{
+    float sum = 0;
+    for(int i = 0; i< nodeList.size()-1;i++)
+    {
+        sum += getDistanceBetweenNPoints(2, nodeList[i], nodeList[i+1]);
+    }
+    return sum;
+}
+
 void Graph::setTaken(long nodeId)
 {
     if(nodeId>=0 && nodeId<graphListing.size())
