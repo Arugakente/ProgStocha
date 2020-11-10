@@ -15,7 +15,7 @@ private:
 public:
     Node(long nId,float xCoord,float yCoord):logicalNumber(nId),x(xCoord),y(yCoord),alreadyTaken(false),isStart(false){};
 
-    float calculateDistance(const Node& point)const ;
+    float calculateDistance(const Node& point,bool geoMode)const ;
 
     void setAlreadyTaken(bool value);
 

@@ -93,7 +93,7 @@ public:
                 distMat.push_back(std::vector<float>());
                 for(int j = 0; j<dimension ; j++)
                 {
-                    distMat.back().push_back(graphListing[i].calculateDistance(graphListing[j]));
+                    distMat.back().push_back(graphListing[i].calculateDistance(graphListing[j],weightType=="GEO"));
                 }
             }
         }
@@ -104,7 +104,7 @@ public:
     };
     const long getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
-    float getDistanceBetweenNPoints(const std::vector<long>& nodeList);
+    float getPathWeight(const std::vector<long>& nodeList);
 
     void setTaken(long nodeId);
     void reinitTaken();

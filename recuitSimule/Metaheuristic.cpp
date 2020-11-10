@@ -51,7 +51,7 @@ vector<long>& Metaheuristic::solve(int initialIndex)
         cout << current << " ";
     }
 
-    energy = toCompute.getDistanceBetweenNPoints(currentPath);
+    energy = toCompute.getPathWeight(currentPath);
     generalBestEnergy = energy;
     currentBestEnergy = energy;
 
@@ -60,7 +60,13 @@ vector<long>& Metaheuristic::solve(int initialIndex)
         cout << endl;
 
         randomiser(currentPath);
-        energy = toCompute.getDistanceBetweenNPoints(currentPath);
+        energy = toCompute.getPathWeight(currentPath);
+
+        cout << temperature << endl;
+        cout << "current energy : " << energy << endl;
+        cout << "current best energy : " << currentBestEnergy << endl;
+        cout << "best energy : " << generalBestEnergy << endl;
+
         if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
         {
             if(energy < generalBestEnergy)
@@ -77,11 +83,6 @@ vector<long>& Metaheuristic::solve(int initialIndex)
             energy = currentBestEnergy;
 
         }
-
-        cout << temperature << endl;
-        cout << "current energy : " << energy << endl;
-        cout << "current best energy : " << currentBestEnergy << endl;
-        cout << "best energy : " << generalBestEnergy << endl;
 
         temperature = temperature*0.99999;
     }

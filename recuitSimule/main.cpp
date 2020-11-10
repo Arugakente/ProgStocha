@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g = Graph("../data/d493.tsp");
+    Graph g = Graph("../data/ali535.tsp");
 /*
     for(int i =0 ; i<g.getGraphListing().size();i++)
     {
@@ -123,10 +123,22 @@ int main()
     Metaheuristic b((float)(150.0),(float)(0.05),g,basicScrambler,gloutonInitialiser);
 
     cout << "test random" << endl;
-    a.solve();
+    vector<long> test1 = a.solve();
     g.reinitTaken();
     cout << "test glouton" << endl;
-    b.solve();
+    vector<long> test2 = b.solve();
+
+    for(auto current : test1)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
+
+    for(auto current : test2)
+    {
+        cout << current << " ";
+    }
+    cout << endl;
 
     return 0;
 }

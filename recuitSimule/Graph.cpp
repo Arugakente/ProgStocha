@@ -54,13 +54,13 @@ const long Graph::getNearestNode(long nodeId)
 
 float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
 {
-    float distance = graphListing.at(p1).calculateDistance(graphListing.at(p2));
+    float distance = graphListing.at(p1).calculateDistance(graphListing.at(p2),weightType=="GEO");
     va_list args;
     va_start(args, p2);
 
     for(int i=0; i<nbNodes-2; ++i){
         long p = va_arg(args, long);
-        distance += graphListing.at(p2).calculateDistance(graphListing.at(p));
+        distance += graphListing.at(p2).calculateDistance(graphListing.at(p),weightType=="GEO");
         p2 = p;
     }
 
@@ -69,12 +69,12 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
     return distance;
 }
 
-float Graph::getDistanceBetweenNPoints(const vector<long>& nodeList)
+float Graph::getPathWeight(const vector<long>& nodeList)
 {
     float sum = 0;
     for(int i = 0; i< nodeList.size()-1;i++)
     {
-        sum += getDistanceBetweenNPoints(2, nodeList[i], nodeList[i+1]);
+        sum += distMat.at(nodeList[i]).at(nodeList[i+1]);
     }
     return sum;
 }
