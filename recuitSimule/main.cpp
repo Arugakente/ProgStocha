@@ -119,8 +119,8 @@ int main()
     }
     cout << endl;
 */
-    Metaheuristic a((float)(150.0),(float)(0.05),g,basicScrambler,randomInitialiser);
-    Metaheuristic b((float)(150.0),(float)(0.05),g,basicScrambler,gloutonInitialiser);
+    Metaheuristic a((float)(150.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
+    Metaheuristic b((float)(150.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();
@@ -133,12 +133,16 @@ int main()
         cout << current << " ";
     }
     cout << endl;
+    cout << endl;
 
     for(auto current : test2)
     {
         cout << current << " ";
     }
     cout << endl;
+
+    a.exportData();
+    b.exportData();
 
     return 0;
 }

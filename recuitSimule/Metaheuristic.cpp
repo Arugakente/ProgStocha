@@ -66,6 +66,10 @@ vector<long>& Metaheuristic::solve(int initialIndex)
         cout << "current energy : " << energy << endl;
         cout << "current best energy : " << currentBestEnergy << endl;
         cout << "best energy : " << generalBestEnergy << endl;
+        currentHistory.push_back(energy);
+        currentBestHistory.push_back(currentBestEnergy);
+        bestHistory.push_back(generalBestEnergy);
+        temperatureHistory.push_back(temperature);
 
         if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
         {
@@ -88,4 +92,16 @@ vector<long>& Metaheuristic::solve(int initialIndex)
     }
 
     return generalBestPath;
+}
+
+void Metaheuristic::exportData()
+{
+    ofstream of;
+    of.open(outputPath);
+    of << "temperature,current,temporary_best,overall_best" << endl;
+    for(int i = 0; i<currentHistory.size(); i++)
+    {
+        of << fixed << temperatureHistory.at(i) << "," <<currentHistory.at(i) << "," << currentBestHistory.at(i) << "," << bestHistory.at(i) << endl;
+    }
+    of.close();
 }
