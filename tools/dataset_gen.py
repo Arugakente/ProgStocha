@@ -7,14 +7,14 @@ import random as rd
 min_pos = -100
 max_pos = 100
 
-if len(sys.argv) < 2:
-    print("Usage : " + str(sys.argv[0]) + " <nb_points>")
+if len(sys.argv) < 3:
+    print("Usage : " + str(sys.argv[0]) + " <nb_points> <output_filename>")
     sys.exit(1)
     
 rd.seed(os.urandom(4))
     
 dim = int(sys.argv[1])
-filename = "d" + str(dim) + ".tsp"
+filename = str(sys.argv[2])
 
 ofile = open("../data/rawData/" + filename, "w")
 
