@@ -1,5 +1,5 @@
 #include "Operators.hpp"
-
+#include <cassert>
 using namespace std;
 
 vector<long> randomInitialiser(Graph& usedGraph,long departureId)
@@ -87,7 +87,32 @@ void multipleScramble(vector<long>& toScramble)
             long tmp = toScramble[permuted1];
             toScramble[permuted1] = toScramble[permuted2];
             toScramble[permuted2] = tmp;
-            probability /= 2.0;
+            probability *= 0.8;
         }
+    }
+}
+
+void stackScramble(std::vector<long>& toScramble)
+{
+    if(toScramble.size() >= 6)
+    {
+        int permuted1 = (rand()%(toScramble.size()-2))+1;
+        int permuted2 = (rand()%(toScramble.size()-2))+1;
+ 
+        while(permuted2 == permuted1)
+        {
+            permuted2 = (rand()%(toScramble.size()-2))+1;
+        }
+        
+        for(int i = -1 ; i<=1 ; i++)
+        {
+            long tmp = toScramble[permuted1+i];
+            toScramble[permuted1+i] = toScramble[permuted2+i];
+            toScramble[permuted2+i] = tmp;
+        }
+    }
+    else
+    {
+        assert(false);
     }
 }

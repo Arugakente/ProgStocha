@@ -47,5 +47,6 @@ public:
     void exportData();
     float getTemperature();
     float getEnergy();
+    float getBestEnergy();
     ~Metaheuristic(){};
 };

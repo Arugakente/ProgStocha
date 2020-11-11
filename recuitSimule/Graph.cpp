@@ -1,7 +1,5 @@
 #include "Graph.hpp"
-#include <cmath>
-#include <cassert>
-#include <cstdarg>
+
 
 using namespace std;
 
@@ -28,7 +26,7 @@ const long Graph::getNearestNode(long nodeId)
 
     vector<float> listDist;
     for(int i=0; i<distMat.size(); ++i){
-        listDist.push_back(distMat.at(i).at(nodeId));
+        listDist.push_back(getEffectiveDistance(i,nodeId));
     }
 
     listDist.erase(listDist.begin()+nodeId);
@@ -74,9 +72,18 @@ float Graph::getPathWeight(const vector<long>& nodeList)
     float sum = 0;
     for(int i = 0; i< nodeList.size()-1;i++)
     {
-        sum += distMat.at(nodeList[i]).at(nodeList[i+1]);
+        sum += getEffectiveDistance(nodeList[i],nodeList[i+1]);
     }
     return sum;
+}
+
+float Graph::getEffectiveDistance(long id1,long id2)
+{
+    float mean = distMat.at(id1).at(id2);
+    std::normal_distribution<float> d{mean,(float)(varianceCoef*mean)};
+    float tmp = d(gen);
+    cout << tmp << " " << mean << endl;
+    return tmp;
 }
 
 void Graph::setTaken(long nodeId)

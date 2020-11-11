@@ -5,6 +5,10 @@
 #include<fstream>
 #include<sstream>
 #include<algorithm>
+#include <cmath>
+#include <cassert>
+#include <cstdarg>
+#include <random>
 
 #include "Node.hpp"
 
@@ -21,8 +25,12 @@ private:
     long dimension;
     std::string weightType;
     std::string dataType;
+    float varianceCoef;
+
+    std::random_device rd{};
+    std::mt19937 gen{rd()};
 public:
-    Graph(std::string inputFile):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimension(0),weightType("none"),dataType("none")
+    Graph(std::string inputFile,float varCo):graphListing(),distMat(),name("none"),type("none"),comment("none"),dimension(0),weightType("none"),dataType("none"),varianceCoef(varCo)
     {
         std::ifstream loadingFile (inputFile);
 
@@ -105,6 +113,7 @@ public:
     const long getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
     float getPathWeight(const std::vector<long>& nodeList);
+    float getEffectiveDistance(long id1,long id2);
 
     void setTaken(long nodeId);
     void reinitTaken();

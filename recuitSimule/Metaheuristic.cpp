@@ -45,11 +45,6 @@ vector<long>& Metaheuristic::solve(int initialIndex)
     vector<long> currentPath = initialBuilder(toCompute,initialIndex);
     currentBestPath = currentPath;
     generalBestPath = currentPath;
-    cout << "original solution" << endl;
-    for(auto current : currentPath)
-    {
-        cout << current << " ";
-    }
 
     energy = toCompute.getPathWeight(currentPath);
     generalBestEnergy = energy;
@@ -57,15 +52,9 @@ vector<long>& Metaheuristic::solve(int initialIndex)
 
     while(temperature >= thresold)
     {
-        cout << endl;
-
         randomiser(currentPath);
         energy = toCompute.getPathWeight(currentPath);
 
-        cout << temperature << endl;
-        cout << "current energy : " << energy << endl;
-        cout << "current best energy : " << currentBestEnergy << endl;
-        cout << "best energy : " << generalBestEnergy << endl;
         currentHistory.push_back(energy);
         currentBestHistory.push_back(currentBestEnergy);
         bestHistory.push_back(generalBestEnergy);
@@ -104,4 +93,9 @@ void Metaheuristic::exportData()
         of << fixed << temperatureHistory.at(i) << "," <<currentHistory.at(i) << "," << currentBestHistory.at(i) << "," << bestHistory.at(i) << endl;
     }
     of.close();
+}
+
+float Metaheuristic::getBestEnergy()
+{
+    return currentBestEnergy;
 }

@@ -14,7 +14,8 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g = Graph("../data/ali535.tsp");
+    Graph g = Graph("../data/ulysses22.tsp",0.025);
+
 /*
     for(int i =0 ; i<g.getGraphListing().size();i++)
     {
@@ -119,10 +120,12 @@ int main()
     }
     cout << endl;
 */
-    Metaheuristic a((float)(150.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
-    Metaheuristic b((float)(150.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
-    Metaheuristic c((float)(150.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./mutli_rand.csv");
-    Metaheuristic d((float)(150.0),(float)(0.05),g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
+    Metaheuristic a((float)(500.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
+    Metaheuristic b((float)(500.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
+    Metaheuristic c((float)(500.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./mutli_rand.csv");
+    Metaheuristic d((float)(500.0),(float)(0.05),g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
+    Metaheuristic e((float)(500.0),(float)(0.05),g,stackScramble,randomInitialiser,"./stack_rand.csv");
+    Metaheuristic f((float)(500.0),(float)(0.05),g,stackScramble,gloutonInitialiser,"./stack_glouton.csv");
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();
@@ -130,41 +133,67 @@ int main()
     cout << "test glouton" << endl;
     vector<long> test2 = b.solve();
     g.reinitTaken();
-    cout << "test random" << endl;
+    cout << "test random multi" << endl;
     vector<long> test3 = c.solve();
     g.reinitTaken();
-    cout << "test glouton" << endl;
+    cout << "test glouton multi" << endl;
     vector<long> test4 = d.solve();
+    g.reinitTaken();
+    cout << "test random stack" << endl;
+    vector<long> test5 = e.solve();
+    g.reinitTaken();
+    cout << "test glouton stack" << endl;
+    vector<long> test6 = f.solve();
 
     for(auto current : test1)
     {
         cout << current << " ";
     }
-    cout << endl;
+    cout << a.getBestEnergy() << endl;
     cout << endl;
 
     for(auto current : test2)
     {
         cout << current << " ";
     }
-    cout << endl;
+    cout << b.getBestEnergy() << endl;
     cout << endl;
 
     for(auto current : test3)
     {
         cout << current << " ";
     }
-    cout << endl;
+    cout << c.getBestEnergy() << endl;
     cout << endl;
 
     for(auto current : test4)
     {
         cout << current << " ";
     }
+    cout << d.getBestEnergy() << endl;
     cout << endl;
+
+
+    for(auto current : test5)
+    {
+        cout << current << " ";
+    }
+    cout << e.getBestEnergy() << endl;
+    cout << endl;
+
+
+    for(auto current : test6)
+    {
+        cout << current << " ";
+    }
+    cout << f.getBestEnergy() << endl;
 
     a.exportData();
     b.exportData();
+    c.exportData();
+    d.exportData();
+    e.exportData();
+    f.exportData();
 
     return 0;
 }
