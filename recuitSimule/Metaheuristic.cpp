@@ -77,7 +77,7 @@ vector<long>& Metaheuristic::solve(int initialIndex)
 
         }
 
-        temperature = temperature*0.99999;
+        temperature = temperature*evolutionFactor;
     }
 
     return generalBestPath;
