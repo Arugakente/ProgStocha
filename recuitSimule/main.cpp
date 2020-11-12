@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g = Graph("../data/ulysses22.tsp",0.025);
+    Graph g = Graph("../data/ulysses22.tsp",0.025f);
 
 /*
     for(int i =0 ; i<g.getGraphListing().size();i++)
@@ -122,7 +122,7 @@ int main()
 */
     Metaheuristic a((float)(500.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
     Metaheuristic b((float)(500.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
-    Metaheuristic c((float)(500.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./mutli_rand.csv");
+    Metaheuristic c((float)(500.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./multi_rand.csv");
     Metaheuristic d((float)(500.0),(float)(0.05),g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
     Metaheuristic e((float)(500.0),(float)(0.05),g,stackScramble,randomInitialiser,"./stack_rand.csv");
     Metaheuristic f((float)(500.0),(float)(0.05),g,stackScramble,gloutonInitialiser,"./stack_glouton.csv");
