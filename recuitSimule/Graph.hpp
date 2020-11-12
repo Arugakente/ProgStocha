@@ -39,7 +39,7 @@ public:
             std::string buffer;
 
             //loading graph metadata
-            while(getline(loadingFile,buffer) && buffer.substr() != "NODE_COORD_SECTION")
+            while(getline(loadingFile,buffer) && buffer != "NODE_COORD_SECTION")
             {
                 std::stringstream bufferStream(buffer);
                 std::string label;
