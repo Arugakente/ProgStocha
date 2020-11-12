@@ -82,7 +82,6 @@ float Graph::getEffectiveDistance(long id1,long id2)
     float mean = distMat.at(id1).at(id2);
     std::normal_distribution<float> d{mean,(float)(varianceCoef*mean)};
     float tmp = d(gen);
-    cout << tmp << " " << mean << endl;
     return tmp;
 }
 
