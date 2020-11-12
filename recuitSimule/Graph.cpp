@@ -74,6 +74,7 @@ float Graph::getPathWeight(const vector<long>& nodeList)
     {
         sum += getEffectiveDistance(nodeList[i],nodeList[i+1]);
     }
+    sum += getEffectiveDistance(nodeList[nodeList.size()-1],nodeList[0]);
     return sum;
 }
 
