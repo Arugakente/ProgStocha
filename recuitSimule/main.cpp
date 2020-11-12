@@ -120,12 +120,12 @@ int main()
     }
     cout << endl;
 */
-    Metaheuristic a((float)(500.0),(float)(0.05),g,basicScrambler,randomInitialiser,"./basic_rand.csv");
-    Metaheuristic b((float)(500.0),(float)(0.05),g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
-    Metaheuristic c((float)(500.0),(float)(0.05),g,multipleScramble,randomInitialiser,"./multi_rand.csv");
-    Metaheuristic d((float)(500.0),(float)(0.05),g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
-    Metaheuristic e((float)(500.0),(float)(0.05),g,stackScramble,randomInitialiser,"./stack_rand.csv");
-    Metaheuristic f((float)(500.0),(float)(0.05),g,stackScramble,gloutonInitialiser,"./stack_glouton.csv");
+    Metaheuristic a((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,randomInitialiser,"./basic_rand.csv");
+    Metaheuristic b((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
+    Metaheuristic c((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,randomInitialiser,"./multi_rand.csv");
+    Metaheuristic d((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
+    Metaheuristic e((float)(500.0),(float)(0.05),0.99999,g,stackScramble,randomInitialiser,"./stack_rand.csv");
+    Metaheuristic f((float)(500.0),(float)(0.05),0.99999,g,stackScramble,gloutonInitialiser,"./stack_glouton.csv");
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();

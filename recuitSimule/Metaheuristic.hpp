@@ -12,6 +12,7 @@ class Metaheuristic
 private:
     float temperature;
     float thresold;
+    float evolutionFactor;
 
     float energy;
     std::vector<long> currentPath;
@@ -34,12 +35,12 @@ private:
     std::vector<float> temperatureHistory;
 
 public:
-    Metaheuristic(float initTemp,float thsld,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&,long),std::string oPath):temperature(initTemp),thresold(thsld),
-                                                                                                                                  energy(0),currentPath(),
-                                                                                                                                  generalBestEnergy(0),generalBestPath(),
-                                                                                                                                  currentBestEnergy(0),currentBestPath(),
-                                                                                                                                  toCompute(loaded),randomiser(randParam),initialBuilder(initParam),
-                                                                                                                                  outputPath(oPath),currentHistory(),currentBestHistory(),bestHistory(),temperatureHistory(){};
+    Metaheuristic(float initTemp,float thsld,float evoFactor,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&,long),std::string oPath):temperature(initTemp),thresold(thsld),evolutionFactor(evoFactor),
+                                                                                                                                                                                energy(0),currentPath(),
+                                                                                                                                                                                generalBestEnergy(0),generalBestPath(),
+                                                                                                                                                                                currentBestEnergy(0),currentBestPath(),
+                                                                                                                                                                                toCompute(loaded),randomiser(randParam),initialBuilder(initParam),
+                                                                                                                                                                                outputPath(oPath),currentHistory(),currentBestHistory(),bestHistory(),temperatureHistory(){};
     const std::vector<long> getCurrentPath();
     const std::vector<long> getGeneralBestPath();
     const std::vector<long> getCurrentBestPath();
