@@ -12,7 +12,7 @@ function createWindow() {
 	win.removeMenu()
 	win.setMaximizable(false)
 	win.setResizable(false)
-	win.loadFile('src/web/index.html')
+	win.loadFile('public/index.html')
 
 	// Show dev tools when pressing Ctrl+Shift+I on keyboard
 	globalShortcut.register("CmdOrCtrl+Shift+I", () => {

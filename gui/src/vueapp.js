@@ -1,8 +1,6 @@
-const $ = require('jquery')
-const Vue = require('vue')
+import Vue from 'vue'
+import App from './App.vue'
 
-$(function() {
-    new Vue({
-        el: "#vueapp"
-    })
-})
+new Vue({
+    render: h => h(App)
+}).$mount('#vueapp')
