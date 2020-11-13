@@ -60,6 +60,11 @@ vector<long>& Metaheuristic::solve(int initialIndex)
         bestHistory.push_back(generalBestEnergy);
         temperatureHistory.push_back(temperature);
 
+        if(RTexport)
+        {
+            ofRT << fixed << temperatureHistory.back() << "," <<currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << endl;
+        }
+
         if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
         {
             if(energy < generalBestEnergy)
@@ -95,7 +100,13 @@ void Metaheuristic::exportData()
     of.close();
 }
 
-float Metaheuristic::getBestEnergy()
+float Metaheuristic::getBestMeanEnergy()
 {
-    return currentBestEnergy;
+    float pathEnergy = 0;
+    for(int i =0; i<generalBestPath.size()-1;i++)
+    {
+        pathEnergy += toCompute.getDistanceBetweenNPoints(2,generalBestPath.at(i),generalBestPath.at(i+1));
+    }
+    pathEnergy += toCompute.getDistanceBetweenNPoints(2,generalBestPath.at(generalBestPath.size()-1),generalBestPath.at(0));
+    return pathEnergy;
 }
