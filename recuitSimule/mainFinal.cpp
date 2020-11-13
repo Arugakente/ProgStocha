@@ -15,12 +15,13 @@ int main(int argc,char** argv)
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    if(argc != 9)
+    if(argc != 10)
     {
-        cerr << "Usage : ./main [begin temperature] [end temperature] [temperature evolution factor] [standard deviation factor] [dataInput] [outputFileName*] [init method**] [scramble method***]" << endl;
+        cerr << "Usage : ./main [begin temperature] [end temperature] [temperature evolution factor] [standard deviation factor] [dataInput] [outputFileName*] [init method**] [scramble method***] [real time exoprt]" << endl;
         cerr << "*no extention for output file (added automatically)" << endl;
         cerr << "**0 random , 1 glouton" << endl;
         cerr << "***0 random exchange , 1 multiple random exchange, 2 3pack echanges" << endl;
+        cerr << "****0 export unique a la fin du programme , 1 export " << endl;
         return 1;
     }
 
@@ -33,6 +34,7 @@ int main(int argc,char** argv)
     valueOutput+=".csv";
     int initialiser = stoi(argv[7]);
     int randomisationMethod = stoi(argv[8]);
+    int RTexport = stoi(argv[9]);
 
     Graph g(dataInput,stdDeviationFactor);
 
@@ -70,9 +72,17 @@ int main(int argc,char** argv)
     }
     cout << endl;
 
-    Metaheuristic meta(beginTemp,endTemp,evolutionFactor,g,randomiser,initialBuilder,valueOutput);
+    Metaheuristic meta(beginTemp,endTemp,evolutionFactor,g,randomiser,initialBuilder,valueOutput,RTexport==1);
 
     meta.solve();
-    meta.exportData();
+    vector<long> result = meta.getGeneralBestPath();
+    for(auto current : result)
+        cout << current << " " ;
+    cout << endl;
+    cout << meta.getBestMeanEnergy() << endl;
+    if(RTexport == 0)
+    {
+        meta.exportData();
+    }
     return 0;
 }

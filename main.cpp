@@ -120,12 +120,12 @@ int main()
     }
     cout << endl;
 */
-    Metaheuristic a((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,randomInitialiser,"./basic_rand.csv");
-    Metaheuristic b((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv");
-    Metaheuristic c((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,randomInitialiser,"./multi_rand.csv");
-    Metaheuristic d((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv");
-    Metaheuristic e((float)(500.0),(float)(0.05),0.99999,g,stackScramble,randomInitialiser,"./stack_rand.csv");
-    Metaheuristic f((float)(500.0),(float)(0.05),0.99999,g,stackScramble,gloutonInitialiser,"./stack_glouton.csv");
+    Metaheuristic a((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,randomInitialiser,"./basic_rand.csv",false);
+    Metaheuristic b((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv",false);
+    Metaheuristic c((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,randomInitialiser,"./multi_rand.csv",false);
+    Metaheuristic d((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv",false);
+    Metaheuristic e((float)(500.0),(float)(0.05),0.99999,g,stackScramble,randomInitialiser,"./stack_rand.csv",false);
+    Metaheuristic f((float)(500.0),(float)(0.05),0.99999,g,stackScramble,gloutonInitialiser,"./stack_glouton.csv",false);
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();
@@ -149,28 +149,28 @@ int main()
     {
         cout << current << " ";
     }
-    cout << a.getBestEnergy() << endl;
+    cout << a.getBestMeanEnergy() << endl;
     cout << endl;
 
     for(auto current : test2)
     {
         cout << current << " ";
     }
-    cout << b.getBestEnergy() << endl;
+    cout << b.getBestMeanEnergy() << endl;
     cout << endl;
 
     for(auto current : test3)
     {
         cout << current << " ";
     }
-    cout << c.getBestEnergy() << endl;
+    cout << c.getBestMeanEnergy() << endl;
     cout << endl;
 
     for(auto current : test4)
     {
         cout << current << " ";
     }
-    cout << d.getBestEnergy() << endl;
+    cout << d.getBestMeanEnergy() << endl;
     cout << endl;
 
 
@@ -178,7 +178,7 @@ int main()
     {
         cout << current << " ";
     }
-    cout << e.getBestEnergy() << endl;
+    cout << e.getBestMeanEnergy() << endl;
     cout << endl;
 
 
@@ -186,7 +186,7 @@ int main()
     {
         cout << current << " ";
     }
-    cout << f.getBestEnergy() << endl;
+    cout << f.getBestMeanEnergy() << endl;
 
     a.exportData();
     b.exportData();
