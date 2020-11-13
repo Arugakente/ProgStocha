@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g("../data/berlin52.tsp",0.025f);
+    Graph g("../data/rawData/d6.tsp",0.025f);
 
 /*
     for(int i =0 ; i<g.getGraphListing().size();i++)
