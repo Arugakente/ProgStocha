@@ -6,176 +6,75 @@
 
     <div class="container">
       <div class="right-section">
-        <h2>Paramètres</h2>
-
-        <div class="parameter">
-          <h3 class="parameter__title">
-            Méthode de calcul d'une 1ère sol. approchée
-          </h3>
-
-          <div class="parameter__field">
-            <input
-              type="radio"
-              id="computingMethod0"
-              name="computingMethod"
-              value="1"
-              checked
-            />
-            <label for="computingMethod0">Aléatoire</label>
-          </div>
-          <div class="parameter__field">
-            <input
-              type="radio"
-              id="computingMethod1"
-              name="computingMethod"
-              value="2"
-            />
-            <label for="computingMethod1">Glouton</label>
-          </div>
-        </div>
-
-        <div class="parameter">
-          <h3 class="parameter__title">Randomisation</h3>
-
-          <div class="parameter__field">
-            <input
-              type="radio"
-              id="randomizeMethod0"
-              name="randomizeMethod"
-              value="1"
-              checked
-            />
-            <label for="randomizeMethod0">Simple</label>
-          </div>
-          <div class="parameter__field">
-            <input
-              type="radio"
-              id="randomizeMethod1"
-              name="randomizeMethod"
-              value="2"
-            />
-            <label for="randomizeMethod1">Multiple</label>
-          </div>
-          <div class="parameter__field">
-            <input
-              type="radio"
-              id="randomizeMethod2"
-              name="randomizeMethod"
-              value="3"
-            />
-            <label for="randomizeMethod2">Par bloc de taille 3</label>
-          </div>
-        </div>
-
-        <div class="parameter">
-          <h3 class="parameter__title">Recuit simulé</h3>
-
-          <div class="parameter__field">
-            <label for="initialTemp">Température initiale</label>
-            <input
-              type="number"
-              id="initialTemp"
-              name="initialTemp"
-              value="200"
-              min="0"
-            />
-          </div>
-          <div class="parameter__field">
-            <label for="finalTemp">Température finale</label>
-            <input
-              type="number"
-              id="finalTemp"
-              name="finalTemp"
-              value="0.05"
-              min="0"
-              step="0.01"
-            />
-          </div>
-          <div class="parameter__field">
-            <label for="reducingFactor">Facteur de diminution</label>
-            <input
-              type="number"
-              id="reducingFactor"
-              name="reducingFactor"
-              value="0.99999"
-              min="0"
-              max="1"
-              step="0.01"
-            />
-          </div>
-
-          <h3 class="parameter__title">Stochastique</h3>
-
-          <div class="parameter__field">
-            <label for="spreadingFactor">Facteur d'étalement</label>
-            <input
-              type="number"
-              id="spreadingFactor"
-              name="spreadingFactor"
-              value="0.025"
-              min="0"
-              max="1"
-              step="0.01"
-            />
-          </div>
-        </div>
-
-        <div class="parameter">
-          <h3 class="parameter__title">Entrée/Sortie</h3>
-
-          <div class="parameter__field">
-            <label for="datasetInput">Dataset à charger</label>
-            <input
-              type="file"
-              id="datasetInput"
-              name="datasetInput"
-              accept=".tsp"
-            />
-          </div>
-          <div class="parameter__field">
-            <label for="fileOutput">Fichier de sortie</label>
-            <input
-              type="file"
-              id="fileOutput"
-              name="fileOutput"
-              webkitdirectory
-              mozdirectory
-              msdirectory
-              odirectory
-              directory
-            />
-          </div>
-        </div>
+        <Form text="Démarrer la résolution" ref="formComponent" textInProgress="Résolution en cours..." @simulation-start="onSimulationStart"></Form>
       </div>
 
       <div class="left-section">
-        <h2>Résultats en temps réel</h2>
-
-        <div class="chart">
-          <img src="../assets/img/resolv.png" alt="Resolve" />
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="right-section">
-        <button class="resolve-btn">Démarrer la résolution</button>
-      </div>
-
-      <div class="left-section">
-        <ul>
-          <li>
-            <p>Référence actuelle : 522.2354</p>
-          </li>
-          <li>
-            <p>Meilleur global : 785.3597</p>
-          </li>
-        </ul>
-      </div>
+		  <Simulation ref="simulationComponent"></Simulation>
+	  </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+const path = require('path')
+const follow = require('text-file-follower')
+
+import Papa from "papaparse"
+
+import Form from "./components/Form.vue"
+import Simulation from "./components/Simulation.vue"
+
+export default {
+  components: {
+    Form,
+    Simulation,
+  },
+  data() {
+    return {
+      hasFinished: false
+    }
+  },
+  methods: {
+    onSimulationStart(event) {
+      let filePath = event.path
+      let finalTemp = event.finalTemp
+
+      let count = 0;
+      let modulo = 100;
+      let follower = follow(filePath)
+
+      follower
+      .on('line', (filename, line) => {
+        if(count > 0 && (count % modulo) === 0) {
+          let parsed = Papa.parse(line)
+
+          parsed.data.forEach(el => {
+            this.$refs.simulationComponent.updateData(el);
+
+            let temp = el[0]
+
+            if(parseFloat(temp).toFixed(2) <= finalTemp && !this.hasFinished) {
+              this.hasFinished = true;
+              this.$refs.formComponent.toggleSimulationBtn()
+            }else if(temp < 100) {
+              modulo = 1000
+            }else if(temp < 15) {
+              modulo = 10000
+            }else if(temp < 1) {
+              modulo = 50000
+            }
+          });
+        }
+
+        count++;
+      })
+      .on('error', (err) => {
+        console.log(err)
+      })
+
+      follower.close()
+    }
+  }
+};
 </script>
