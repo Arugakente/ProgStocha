@@ -58,6 +58,11 @@ vector<long>& Metaheuristic::solve(int initialIndex)
 
         energy = toCompute.getPathWeight(currentPath);
 
+        for(int i=0; i<100; ++i){
+            cout << energy << endl;
+            energy = toCompute.getPathWeightRandomized(currentPath);
+        }
+
         //ajouter la question de la containte stochastique ici
 
         currentHistory.push_back(energy);
@@ -112,7 +117,7 @@ void Metaheuristic::exportData()
     ofstream of;
     of.open(outputPath);
     of << "temperature,current,temporary_best,overall_best" << endl;
-    for(int i = 0; i<currentHistory.size(); i++)
+    for(size_t i = 0; i<currentHistory.size(); i++)
     {
         of << fixed << temperatureHistory.at(i) << "," <<currentHistory.at(i) << "," << currentBestHistory.at(i) << "," << bestHistory.at(i) << endl;
     }

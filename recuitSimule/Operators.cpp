@@ -2,7 +2,7 @@
 #include <cassert>
 using namespace std;
 
-vector<long> randomInitialiser(Graph& usedGraph,long departureId)
+vector<long> randomInitialiser(Graph& usedGraph,unsigned long departureId)
 {
     vector<long> generatedSol;
     bool offset = false;
@@ -13,7 +13,7 @@ vector<long> randomInitialiser(Graph& usedGraph,long departureId)
         offset = true;
     }
 
-    for(int i = 0 ; i<usedGraph.getGraphListing().size();i++)
+    for(size_t i = 0 ; i<usedGraph.getGraphListing().size();i++)
     {
         if(i != departureId)
         {
@@ -25,7 +25,7 @@ vector<long> randomInitialiser(Graph& usedGraph,long departureId)
     return generatedSol;
 }
 
-vector<long> gloutonInitialiser(Graph& usedGraph,long departureId)
+vector<long> gloutonInitialiser(Graph& usedGraph,unsigned long departureId)
 {
     vector<long> generatedSol;
 

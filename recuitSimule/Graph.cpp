@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const Node& Graph::operator[](long nodeId) const
+const Node& Graph::operator[](unsigned long nodeId) const
 {
     if(nodeId>=0 && nodeId<graphListing.size())
     {
@@ -19,13 +19,13 @@ const long Graph::getNearestNode(long nodeId)
 {
 
     vector<float> indexList;
-    for(int i=0; i<graphListing.size();i++)
+    for(size_t i=0; i<graphListing.size();i++)
     {
         indexList.push_back(i);
     }
 
     vector<float> listDist;
-    for(int i=0; i<distMat.size(); ++i){
+    for(size_t i=0; i<distMat.size(); ++i){
         listDist.push_back(getEffectiveDistance(i,nodeId));
     }
 
@@ -70,7 +70,7 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
 float Graph::getPathWeightRandomized(const vector<long>& nodeList)
 {
     float sum = 0;
-    for(int i = 0; i< nodeList.size()-1;i++)
+    for(size_t i = 0; i< nodeList.size()-1;i++)
     {
         sum += getEffectiveDistance(nodeList[i],nodeList[i+1]);
     }
@@ -81,7 +81,7 @@ float Graph::getPathWeightRandomized(const vector<long>& nodeList)
 float Graph::getPathWeight(const vector<long>& nodeList)
 {
     float sum = 0;
-    for(int i = 0; i< nodeList.size()-1;i++)
+    for(size_t i = 0; i< nodeList.size()-1;i++)
     {
         sum += distMat.at(nodeList[i]).at(nodeList[i+1]);
     }
@@ -98,7 +98,7 @@ float Graph::getEffectiveDistance(long id1,long id2)
 }
 
 
-void Graph::setTaken(long nodeId)
+void Graph::setTaken(unsigned long nodeId)
 {
     if(nodeId>=0 && nodeId<graphListing.size())
         graphListing.at(nodeId).setAlreadyTaken(true);
@@ -106,7 +106,7 @@ void Graph::setTaken(long nodeId)
 
 void Graph::reinitTaken()
 {
-    for(int i = 0 ; i< graphListing.size() ; i++)
+    for(size_t i = 0 ; i< graphListing.size() ; i++)
     {
         graphListing.at(i).setAlreadyTaken(false);
     }
@@ -122,7 +122,7 @@ const vector<vector<float>>& Graph::getDistMat() const
     return distMat;
 }
 
-long Graph::getGraphDim() const
+unsigned long Graph::getGraphDim() const
 {
     return dimension;
 }

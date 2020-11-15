@@ -39,7 +39,7 @@ int main(int argc,char** argv)
     Graph g(dataInput,stdDeviationFactor);
 
     void (*randomiser)(std::vector<long>&) ;
-    std::vector<long> (*initialBuilder)(Graph&,long) ;
+    std::vector<long> (*initialBuilder)(Graph&, unsigned long) ;
 
     cout << "starting in ";
     switch (initialiser)

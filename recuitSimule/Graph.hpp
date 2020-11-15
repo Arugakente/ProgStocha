@@ -22,7 +22,7 @@ private:
     std::string name;
     std::string type;
     std::string comment;
-    long dimension;
+    unsigned long dimension;
     std::string weightType;
     std::string dataType;
     float varianceCoef;
@@ -96,10 +96,10 @@ public:
             }
             loadingFile.close();
 
-            for(int i = 0;i<dimension ; i++)
+            for(unsigned long i = 0;i<dimension ; i++)
             {
                 distMat.push_back(std::vector<float>());
-                for(int j = 0; j<dimension ; j++)
+                for(unsigned long j = 0; j<dimension ; j++)
                 {
                     distMat.back().push_back(graphListing[i].calculateDistance(graphListing[j],weightType=="GEO"));
                 }
@@ -116,15 +116,15 @@ public:
     float getPathWeightRandomized(const std::vector<long>& nodeList);
     float getEffectiveDistance(long id1,long id2);
 
-    void setTaken(long nodeId);
+    void setTaken(unsigned long nodeId);
     void reinitTaken();
 
     const std::vector<Node>& getGraphListing() const ;
     const std::vector<std::vector<float>>& getDistMat() const;
 
-    long getGraphDim() const;
+    unsigned long getGraphDim() const;
 
-    const Node& operator[](long nodeId) const;
+    const Node& operator[](unsigned long nodeId) const;
     ~Graph(){};
 };
 

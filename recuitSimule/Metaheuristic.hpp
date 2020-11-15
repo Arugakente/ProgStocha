@@ -26,7 +26,7 @@ private:
     Graph& toCompute;
 
     void (*randomiser)(std::vector<long>&) ;
-    std::vector<long> (*initialBuilder)(Graph&,long) ;
+    std::vector<long> (*initialBuilder)(Graph&,unsigned long) ;
 
     std::string outputPath;
     std::vector<float> currentHistory;
@@ -38,7 +38,7 @@ private:
     std::ofstream ofRT;
 
 public:
-    Metaheuristic(float initTemp,float thsld,float evoFactor,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&,long),std::string oPath,bool RTE):temperature(initTemp),thresold(thsld),evolutionFactor(evoFactor),
+    Metaheuristic(float initTemp,float thsld,float evoFactor,Graph& loaded,void (*randParam)(std::vector<long>&),std::vector<long> (*initParam)(Graph&, unsigned long),std::string oPath,bool RTE):temperature(initTemp),thresold(thsld),evolutionFactor(evoFactor),
                                                                                                                                                                                 energy(0),currentPath(),
                                                                                                                                                                                 generalBestEnergy(0),generalBestPath(),
                                                                                                                                                                                 currentBestEnergy(0),currentBestPath(),
