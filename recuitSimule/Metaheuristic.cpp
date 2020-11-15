@@ -103,7 +103,7 @@ vector<long> &Metaheuristic::solve(int initialIndex)
                     }
                 }
 
-                if ((float)cptEnergyUp / (float)20 < 0.90f)
+                if ((float)cptEnergyUp / (float)100 < 0.90f)
                 {
                     solutionValid = false;
                 }
