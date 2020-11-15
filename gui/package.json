@@ -1,6 +1,6 @@
 {
-	"name": "gui",
-	"description": "Recuit Simulator V10.2",
+	"name": "rcv8",
+	"description": "Recuit Simulator V8",
 	"version": "1.0.0",
 	"main": "src/main.js",
 	"license": "MIT",
@@ -47,7 +47,7 @@
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "gui"
+						"name": "rcv8"
 					}
 				},
 				{

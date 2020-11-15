@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <h1>Recuit simulator V10.2</h1>
+      <h1>Recuit simulator V8</h1>
     </div>
 
     <div class="container">
