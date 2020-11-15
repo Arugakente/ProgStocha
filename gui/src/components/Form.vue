@@ -270,7 +270,18 @@ export default {
         return;
       }
 
-      if (process.platform != "linux") {
+      let executablePath = null;
+
+      if (process.platform === "linux") {
+        executablePath = "./assets/exec/main";
+      } else if (
+        process.platform === "win32" ||
+        process.plateform === "win64"
+      ) {
+        executablePath = "./assets/exec/main-win.exe";
+      } else if (process.platform === "darwin") {
+        executablePath = "./assets/exec/main-mac";
+      } else {
         this.$toast.warning("Système d'exploitation non supporté.");
         return;
       }
@@ -284,7 +295,6 @@ export default {
 
       fs.closeSync(fs.openSync("./outputs/" + this.fileOutput + ".csv", "w"));
 
-      let executablePath = "./assets/exec/main";
       let parameters = [
         this.initialTemp,
         this.finalTemp,
