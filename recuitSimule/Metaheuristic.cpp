@@ -50,6 +50,8 @@ vector<long>& Metaheuristic::solve(int initialIndex)
     generalBestEnergy = energy;
     currentBestEnergy = energy;
 
+    bool bestChanged = true;
+
     while(temperature >= thresold)
     {
         randomiser(currentPath);
@@ -66,9 +68,17 @@ vector<long>& Metaheuristic::solve(int initialIndex)
         if(RTexport)
         {
             ofRT << fixed << temperatureHistory.back() << "," <<currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << ",";
-            for(auto current : generalBestPath)
+            if(bestChanged)
             {
-                ofRT << current << " " ;
+                for(auto current : generalBestPath)
+                {
+                    ofRT << current << " " ;
+                }
+                bestChanged = false;
+            }
+            else
+            {
+                ofRT << "NC";
             }
             ofRT << endl;
         }
@@ -79,6 +89,7 @@ vector<long>& Metaheuristic::solve(int initialIndex)
             {
                 generalBestPath = currentPath;
                 generalBestEnergy = energy;
+                bestChanged = true;
             }
             currentBestPath = currentPath;
             currentBestEnergy = energy;
