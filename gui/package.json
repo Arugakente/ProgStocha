@@ -1,5 +1,6 @@
 {
 	"name": "gui",
+	"description": "Recuit Simulator V10.2",
 	"version": "1.0.0",
 	"main": "src/main.js",
 	"license": "MIT",

@@ -8,10 +8,13 @@
 
     <ul>
       <li>
-        <p>Référence actuelle : {{ actualRef }}</p>
+        <p>Référence actuelle : <span v-if="actualRef !== null">{{ actualRef }}</span><span v-else>Non calculé</span></p>
       </li>
       <li>
-        <p>Meilleur global : {{ globalBest }}</p>
+        <p>Meilleur global : <span v-if="globalBest !== null">{{ globalBest }}</span><span v-else>Non calculé</span></p>
+      </li>
+      <li>
+        <p>Meilleur chemin : <span v-if="globalBestPath !== null">{{ globalBestPath }}</span><span v-else>Non calculé</span></p>
       </li>
     </ul>
   </div>
@@ -25,6 +28,7 @@ export default {
     return {
       actualRef: null,
       globalBest: null,
+      globalBestPath: null,
       chart: null,
     };
   },
@@ -38,6 +42,7 @@ export default {
 
       this.actualRef = null;
       this.globalBest = null;
+      this.globalBestPath = null;
     },
     updateData(inData) {
       this.chart.data.labels.push(parseFloat(inData[0]).toFixed(2));
@@ -51,10 +56,11 @@ export default {
       // Current energy
       this.chart.data.datasets[2].data.push(inData[1]);
 
-      this.chart.update();
-
       this.actualRef = parseFloat(inData[2]).toFixed(4);
       this.globalBest = parseFloat(inData[3]).toFixed(4);
+      this.globalBestPath = inData[4];
+
+      this.chart.update();
     },
   },
   mounted() {

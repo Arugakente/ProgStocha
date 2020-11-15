@@ -164,6 +164,7 @@
 
 <script>
 const fs = require("fs");
+const process = require("process");
 
 import { execFile } from "child_process";
 import {
@@ -269,8 +270,12 @@ export default {
         return;
       }
 
-      let that = this;
+      if (process.platform != "linux") {
+        this.$toast.warning("Système d'exploitation non supporté.");
+        return;
+      }
 
+      let that = this;
       this.deactivateSimulationBtn();
 
       if (!fs.existsSync("./outputs")) {
@@ -292,7 +297,7 @@ export default {
         1,
       ];
 
-      console.log("param: " + parameters)
+      console.log("param: " + parameters);
 
       let proc = execFile(executablePath, parameters, function (
         err,
