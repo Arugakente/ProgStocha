@@ -14,7 +14,7 @@ int main()
     // A LAISSER DANS LE FINAL !!!!!
     srand (time(NULL));
 
-    Graph g("../data/rawData/d6.tsp",0.025f);
+    Graph g("../data/tsplib_dataset/berlin52.tsp",0.15f);
 
 /*
     for(int i =0 ; i<g.getGraphListing().size();i++)
@@ -120,12 +120,12 @@ int main()
     }
     cout << endl;
 */
-    Metaheuristic a((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,randomInitialiser,"./basic_rand.csv",false);
-    Metaheuristic b((float)(500.0),(float)(0.05),0.99999,g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv",false);
-    Metaheuristic c((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,randomInitialiser,"./multi_rand.csv",false);
-    Metaheuristic d((float)(500.0),(float)(0.05),0.99999,g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv",false);
-    Metaheuristic e((float)(500.0),(float)(0.05),0.99999,g,stackScramble,randomInitialiser,"./stack_rand.csv",false);
-    Metaheuristic f((float)(500.0),(float)(0.05),0.99999,g,stackScramble,gloutonInitialiser,"./stack_glouton.csv",false);
+    Metaheuristic a((float)(200.0),(float)(0.05),0.99999,g,basicScrambler,randomInitialiser,"./basic_rand.csv",false);
+    Metaheuristic b((float)(200.0),(float)(0.05),0.99999,g,basicScrambler,gloutonInitialiser,"./basic_glouton.csv",false);
+    Metaheuristic c((float)(200.0),(float)(0.05),0.99999,g,multipleScramble,randomInitialiser,"./multi_rand.csv",false);
+    Metaheuristic d((float)(200.0),(float)(0.05),0.99999,g,multipleScramble,gloutonInitialiser,"./multi_glouton.csv",false);
+    Metaheuristic e((float)(200.0),(float)(0.05),0.99999,g,stackScramble,randomInitialiser,"./stack_rand.csv",false);
+    Metaheuristic f((float)(200.0),(float)(0.05),0.99999,g,stackScramble,gloutonInitialiser,"./stack_glouton.csv",false);
 
     cout << "test random" << endl;
     vector<long> test1 = a.solve();

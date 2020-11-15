@@ -1,15 +1,16 @@
 #include "Metaheuristic.hpp"
-#include<algorithm>
-#include<sstream>
-#include<cmath>
+#include <algorithm>
+#include <sstream>
+#include <cmath>
+#include <omp.h>
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 const vector<long> Metaheuristic::getCurrentPath()
 {
     vector<long> toReturn;
-    for(auto current : currentPath)
+    for (auto current : currentPath)
         toReturn.push_back(toCompute[current].getLogicalNumber());
     return toReturn;
 }
@@ -17,7 +18,7 @@ const vector<long> Metaheuristic::getCurrentPath()
 const vector<long> Metaheuristic::getGeneralBestPath()
 {
     vector<long> toReturn;
-    for(auto current : generalBestPath)
+    for (auto current : generalBestPath)
         toReturn.push_back(toCompute[current].getLogicalNumber());
     return toReturn;
 }
@@ -25,7 +26,7 @@ const vector<long> Metaheuristic::getGeneralBestPath()
 const vector<long> Metaheuristic::getCurrentBestPath()
 {
     vector<long> toReturn;
-    for(auto current : currentBestPath)
+    for (auto current : currentBestPath)
         toReturn.push_back(toCompute[current].getLogicalNumber());
     return toReturn;
 }
@@ -40,9 +41,9 @@ float Metaheuristic::getEnergy()
     return energy;
 }
 
-vector<long>& Metaheuristic::solve(int initialIndex)
+vector<long> &Metaheuristic::solve(int initialIndex)
 {
-    currentPath = initialBuilder(toCompute,initialIndex);
+    currentPath = initialBuilder(toCompute, initialIndex);
     currentBestPath = currentPath;
     generalBestPath = currentPath;
 
@@ -50,34 +51,31 @@ vector<long>& Metaheuristic::solve(int initialIndex)
     generalBestEnergy = energy;
     currentBestEnergy = energy;
 
+    float energyRandom;
     bool bestChanged = true;
+    bool solutionValid = true;
 
-    while(temperature >= thresold)
+    while (temperature >= thresold)
     {
         randomiser(currentPath);
 
+        //cout << temperature << endl;
+
         energy = toCompute.getPathWeight(currentPath);
-
-        for(int i=0; i<100; ++i){
-            cout << energy << endl;
-            energy = toCompute.getPathWeightRandomized(currentPath);
-        }
-
-        //ajouter la question de la containte stochastique ici
 
         currentHistory.push_back(energy);
         currentBestHistory.push_back(currentBestEnergy);
         bestHistory.push_back(generalBestEnergy);
         temperatureHistory.push_back(temperature);
 
-        if(RTexport)
+        if (RTexport)
         {
-            ofRT << fixed << temperatureHistory.back() << "," <<currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << ",";
-            if(bestChanged)
+            ofRT << fixed << temperatureHistory.back() << "," << currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << ",";
+            if (bestChanged)
             {
-                for(auto current : generalBestPath)
+                for (auto current : generalBestPath)
                 {
-                    ofRT << current << " " ;
+                    ofRT << current << " ";
                 }
                 bestChanged = false;
             }
@@ -88,25 +86,56 @@ vector<long>& Metaheuristic::solve(int initialIndex)
             ofRT << endl;
         }
 
-        if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
+        if ((energy < currentBestEnergy) || (float(rand()) / float((RAND_MAX))) < exp(-(abs(energy - currentBestEnergy) / temperature)))
         {
-            if(energy < generalBestEnergy)
+            if (!((float(rand()) / float((RAND_MAX))) < exp(-(abs(energy - currentBestEnergy) / temperature))))
             {
-                generalBestPath = currentPath;
-                generalBestEnergy = energy;
-                bestChanged = true;
+                int cptEnergyUp = 0;
+
+                #pragma omp parallel for reduction(+: cptEnergyUp)
+                for (int i = 0; i < 100; ++i)
+                {
+                    energyRandom = toCompute.getPathWeightRandomized(currentPath);
+
+                    if (currentBestEnergy * 1.30 > energyRandom)
+                    {
+                        cptEnergyUp += 1;
+                    }
+                }
+
+                if ((float)cptEnergyUp / (float)20 < 0.90f)
+                {
+                    solutionValid = false;
+                }
+                else
+                {
+                    solutionValid = true;
+                }
             }
-            currentBestPath = currentPath;
-            currentBestEnergy = energy;
+            else
+            {
+                solutionValid = true;
+            }
+
+            if (solutionValid)
+            {
+                if (energy < generalBestEnergy)
+                {
+                    generalBestPath = currentPath;
+                    generalBestEnergy = energy;
+                    bestChanged = true;
+                }
+                currentBestPath = currentPath;
+                currentBestEnergy = energy;
+            }
         }
         else
         {
             currentPath = currentBestPath;
             energy = currentBestEnergy;
-
         }
 
-        temperature = temperature*evolutionFactor;
+        temperature = temperature * evolutionFactor;
     }
 
     return generalBestPath;
@@ -117,9 +146,9 @@ void Metaheuristic::exportData()
     ofstream of;
     of.open(outputPath);
     of << "temperature,current,temporary_best,overall_best" << endl;
-    for(size_t i = 0; i<currentHistory.size(); i++)
+    for (size_t i = 0; i < currentHistory.size(); i++)
     {
-        of << fixed << temperatureHistory.at(i) << "," <<currentHistory.at(i) << "," << currentBestHistory.at(i) << "," << bestHistory.at(i) << endl;
+        of << fixed << temperatureHistory.at(i) << "," << currentHistory.at(i) << "," << currentBestHistory.at(i) << "," << bestHistory.at(i) << endl;
     }
     of.close();
 }
