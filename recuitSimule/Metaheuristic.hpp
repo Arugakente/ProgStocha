@@ -48,7 +48,7 @@ public:
                                                                                                                                                                                     if(RTexport)
                                                                                                                                                                                     {
                                                                                                                                                                                         ofRT.open(outputPath);
-                                                                                                                                                                                        ofRT << "temperature,current,temporary_best,overall_best" << std::endl;
+                                                                                                                                                                                        ofRT << "temperature,current,temporary_best,overall_best,globalBPath" << std::endl;
                                                                                                                                                                                     }
                                                                                                                                                                                 };
     const std::vector<long> getCurrentPath();

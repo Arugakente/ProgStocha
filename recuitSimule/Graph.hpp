@@ -113,6 +113,7 @@ public:
     const long getNearestNode(long nodeId);
     float getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...);
     float getPathWeight(const std::vector<long>& nodeList);
+    float getPathWeightRandomized(const std::vector<long>& nodeList);
     float getEffectiveDistance(long id1,long id2);
 
     void setTaken(long nodeId);

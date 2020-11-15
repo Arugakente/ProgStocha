@@ -67,7 +67,7 @@ float Graph::getDistanceBetweenNPoints(int nbNodes, long p1, long p2, ...)
     return distance;
 }
 
-float Graph::getPathWeight(const vector<long>& nodeList)
+float Graph::getPathWeightRandomized(const vector<long>& nodeList)
 {
     float sum = 0;
     for(int i = 0; i< nodeList.size()-1;i++)
@@ -78,6 +78,17 @@ float Graph::getPathWeight(const vector<long>& nodeList)
     return sum;
 }
 
+float Graph::getPathWeight(const vector<long>& nodeList)
+{
+    float sum = 0;
+    for(int i = 0; i< nodeList.size()-1;i++)
+    {
+        sum += distMat.at(nodeList[i]).at(nodeList[i+1]);
+    }
+    sum +=  distMat.at(nodeList[nodeList.size()-1]).at(nodeList[0]);
+    return sum;
+}
+
 float Graph::getEffectiveDistance(long id1,long id2)
 {
     float mean = distMat.at(id1).at(id2);
@@ -85,6 +96,7 @@ float Graph::getEffectiveDistance(long id1,long id2)
     float tmp = d(gen);
     return tmp;
 }
+
 
 void Graph::setTaken(long nodeId)
 {

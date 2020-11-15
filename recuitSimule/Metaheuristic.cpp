@@ -42,7 +42,7 @@ float Metaheuristic::getEnergy()
 
 vector<long>& Metaheuristic::solve(int initialIndex)
 {
-    vector<long> currentPath = initialBuilder(toCompute,initialIndex);
+    currentPath = initialBuilder(toCompute,initialIndex);
     currentBestPath = currentPath;
     generalBestPath = currentPath;
 
@@ -53,7 +53,10 @@ vector<long>& Metaheuristic::solve(int initialIndex)
     while(temperature >= thresold)
     {
         randomiser(currentPath);
+
         energy = toCompute.getPathWeight(currentPath);
+
+        //ajouter la question de la containte stochastique ici
 
         currentHistory.push_back(energy);
         currentBestHistory.push_back(currentBestEnergy);
@@ -62,7 +65,12 @@ vector<long>& Metaheuristic::solve(int initialIndex)
 
         if(RTexport)
         {
-            ofRT << fixed << temperatureHistory.back() << "," <<currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << endl;
+            ofRT << fixed << temperatureHistory.back() << "," <<currentHistory.back() << "," << currentBestHistory.back() << "," << bestHistory.back() << ",";
+            for(auto current : generalBestPath)
+            {
+                ofRT << current << " " ;
+            }
+            ofRT << endl;
         }
 
         if(energy < currentBestEnergy || (float(rand())/float((RAND_MAX))) < exp(-(abs(energy-currentBestEnergy)/temperature) ) )
@@ -102,11 +110,5 @@ void Metaheuristic::exportData()
 
 float Metaheuristic::getBestMeanEnergy()
 {
-    float pathEnergy = 0;
-    for(int i =0; i<generalBestPath.size()-1;i++)
-    {
-        pathEnergy += toCompute.getDistanceBetweenNPoints(2,generalBestPath.at(i),generalBestPath.at(i+1));
-    }
-    pathEnergy += toCompute.getDistanceBetweenNPoints(2,generalBestPath.at(generalBestPath.size()-1),generalBestPath.at(0));
-    return pathEnergy;
+    return generalBestEnergy;
 }
