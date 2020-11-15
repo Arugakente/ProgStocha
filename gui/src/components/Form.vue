@@ -278,7 +278,7 @@ export default {
         process.platform === "win32" ||
         process.plateform === "win64"
       ) {
-        executablePath = "./assets/exec/main-win.exe";
+        executablePath = ".\\assets\\exec\\main-win.exe";
       } else if (process.platform === "darwin") {
         executablePath = "./assets/exec/main-mac";
       } else {

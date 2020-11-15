@@ -3,6 +3,7 @@
 	"description": "Recuit Simulator V8",
 	"version": "1.0.0",
 	"main": "src/main.js",
+	"author": "Guillaume GOSSET, Quentin LASOTA, Thomas PICHARD, Gael SCION",
 	"license": "MIT",
 	"scripts": {
 		"start": "electron-forge start",
