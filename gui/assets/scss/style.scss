@@ -1,3 +1,5 @@
+@import '../../node_modules/vue-toast-notification/dist/theme-sugar.css';
+
 @import "colors";
 
 body {
@@ -78,6 +80,7 @@ p {
         }
 
         input[type="number"],
+        input[type="text"],
         input[type="file"] {
             width: 50%;
             border-radius: 4px;

@@ -6,7 +6,7 @@
 
     <div class="container">
       <div class="right-section">
-        <Form text="Démarrer la résolution" ref="formComponent" textInProgress="Résolution en cours..." @simulation-start="onSimulationStart"></Form>
+        <Form text="Démarrer la résolution" ref="formComponent" textInProgress="Résolution en cours..." @simulation-start="onSimulationStart" @simulation-failed="onSimulationFailed"></Form>
       </div>
 
       <div class="left-section">
@@ -37,6 +37,9 @@ export default {
   },
   methods: {
     onSimulationStart(event) {
+      this.$refs.simulationComponent.clearData()
+      this.hasFinished = false
+
       let filePath = event.path
       let finalTemp = event.finalTemp
 
@@ -50,13 +53,14 @@ export default {
           let parsed = Papa.parse(line)
 
           parsed.data.forEach(el => {
-            this.$refs.simulationComponent.updateData(el);
+            this.$refs.simulationComponent.updateData(el)
 
             let temp = el[0]
 
             if(parseFloat(temp).toFixed(2) <= finalTemp && !this.hasFinished) {
               this.hasFinished = true;
-              this.$refs.formComponent.toggleSimulationBtn()
+              this.$refs.formComponent.activateSimulationBtn()
+              this.$toast.success('La résolution est terminée !')
             }else if(temp < 100) {
               modulo = 1000
             }else if(temp < 15) {
@@ -71,9 +75,14 @@ export default {
       })
       .on('error', (err) => {
         console.log(err)
+        that.$toast.error('Echec de la résolution.')
       })
 
       follower.close()
+    },
+    onSimulationFailed(event) {
+      this.$toast.error('Echec de la résolution.')
+      this.$refs.formComponent.activateSimulationBtn()
     }
   }
 };

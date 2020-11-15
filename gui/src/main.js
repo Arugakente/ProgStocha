@@ -3,7 +3,7 @@ const { app, globalShortcut, BrowserWindow } = require('electron')
 function createWindow() {
 	const win = new BrowserWindow({
 		width: 1180,
-		height: 840,
+		height: 700,
 		webPreferences: {
 			nodeIntegration: true
 		}
